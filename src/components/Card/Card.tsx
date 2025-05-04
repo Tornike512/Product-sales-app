@@ -1,6 +1,14 @@
+"use client";
+
+import { useGetAllProducts } from "@/hooks/useGetAllProducts";
+
 import "../Card/Card.css";
 
 export default function Card({ num }: { num: number }) {
+  const { products } = useGetAllProducts();
+
+  console.log(products);
+
   return (
     <div key={num} className="product-card">
       <div className="product-image">
