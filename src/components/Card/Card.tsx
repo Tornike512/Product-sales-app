@@ -1,19 +1,33 @@
+import Image from "next/image";
+
 import "../Card/Card.css";
 
-export default function Card({ num }: { num: number }) {
+export default function Card({
+  num,
+  image,
+  title,
+  price,
+  id,
+}: {
+  num: number;
+  image: string;
+  title: string;
+  price: number;
+  id: string;
+}) {
   return (
-    <div key={num} className="product-card">
+    <div key={id} className="product-card">
       <div className="product-image">
-        <img
-          src="/placeholder.jpg"
-          alt={`Product ${num}`}
-          width={200}
-          height={200}
+        <Image
+          src={image}
+          width={500}
+          height={300}
+          alt="Description of the image"
         />
       </div>
       <div className="product-info">
-        <div className="product-title">Product {num}</div>
-        <div className="product-price">${(49 + num * 30).toFixed(2)}</div>
+        <div className="product-title">{title}</div>
+        <div className="product-price">{price}</div>
       </div>
     </div>
   );

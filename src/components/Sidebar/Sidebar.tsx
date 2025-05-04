@@ -12,6 +12,7 @@ export default function Sidebar() {
   const upperCaseStores = stores.map((store) => {
     return store.charAt(0).toUpperCase() + store.slice(1).replace(/_/g, " ");
   });
+
   return (
     <aside className="sidebar">
       <h2>Stores</h2>
