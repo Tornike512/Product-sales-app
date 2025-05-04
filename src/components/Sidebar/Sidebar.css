@@ -23,6 +23,7 @@
   color: #333;
   display: block;
   transition: color 0.3s;
+  cursor: pointer;
 }
 
 .category-list a:hover {
