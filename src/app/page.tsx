@@ -13,8 +13,8 @@ export default function Home() {
     <>
       <h1>Every Listed Product</h1>
       <div className="product-grid">
-        {products?.map((product) => (
-          <Card key={product.id} image={product.image} />
+        {products?.map((product, index) => (
+          <Card key={index} title={product.title} />
         ))}
       </div>
     </>

@@ -11,45 +11,23 @@ interface Product {
   oldPrice: string;
   category: string;
   discountPercentage: string;
+  store: string;
 }
 
-interface ProductCategories {
-  alcohol: Product[];
-  conserve: Product[];
-  household_chemicals: Product[];
-  sweets: Product[];
-  fish: Product[];
-  soft_drinks: Product[];
-  coffee_tea: Product[];
-  snacks: Product[];
-  diary_products: Product[];
-  frozen_products: Product[];
-  meat_products: Product[];
-  confentionery: Product[];
-  fruits_and_vegetables: Product[];
-  kitchen_accessories: Product[];
-  textiles: Product[];
-  school_things: Product[];
-  toys: Product[];
-  accessories: Product[];
-}
-
+// Spar product interface matches what's in your data
 interface SparProduct {
   id: string;
   title: string;
   imageUrl: string;
   price: string;
   source: string;
+  store: string;
+  category: string;
 }
 
-interface SparStore {
-  discounted: SparProduct[];
-}
-
-interface StoreData {
-  nikora: ProductCategories;
-  spar: SparStore;
-}
+// The complete data structure seems to be a flat array of products
+// rather than the nested structure in your current interface
+type StoreData = (Product | SparProduct)[];
 
 export function useGetAllProducts() {
   const [products, setProducts] = useState<StoreData | null>(null);
@@ -58,7 +36,6 @@ export function useGetAllProducts() {
     try {
       const response = await axios.get("http://localhost:3000/api/promotions");
       setProducts(response.data);
-
       return response.data;
     } catch (error) {
       console.error("Error fetching products:", error);
