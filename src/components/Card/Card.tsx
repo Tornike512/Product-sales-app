@@ -3,20 +3,16 @@ import Image from "next/image";
 import "../Card/Card.css";
 
 export default function Card({
-  num,
   image,
   title,
   price,
-  id,
 }: {
-  num: number;
   image: string;
   title: string;
-  price: number;
-  id: string;
+  price: string;
 }) {
   return (
-    <div key={id} className="product-card">
+    <div className="product-card">
       <div className="product-image">
         <Image
           src={image}

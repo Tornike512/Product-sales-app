@@ -14,10 +14,9 @@ interface Product {
   store: string;
 }
 
-// Spar product interface matches what's in your data
 interface SparProduct {
   id: string;
-  title: string;
+  productName: string;
   imageUrl: string;
   price: string;
   source: string;
@@ -25,8 +24,6 @@ interface SparProduct {
   category: string;
 }
 
-// The complete data structure seems to be a flat array of products
-// rather than the nested structure in your current interface
 type StoreData = (Product | SparProduct)[];
 
 export function useGetAllProducts() {

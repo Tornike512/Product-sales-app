@@ -14,7 +14,16 @@ export default function Home() {
       <h1>Every Listed Product</h1>
       <div className="product-grid">
         {products?.map((product, index) => (
-          <Card key={index} title={product.title} />
+          <Card
+            key={index}
+            title={product.productName}
+            image={product.imageUrl}
+            price={
+              "newPrice" in product
+                ? (Number(product.newPrice) / 100).toFixed(2)
+                : (Number(product.price) / 100).toFixed(2)
+            }
+          />
         ))}
       </div>
     </>
