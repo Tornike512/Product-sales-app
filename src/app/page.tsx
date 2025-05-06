@@ -18,9 +18,21 @@ export default function Home() {
             key={index}
             title={product.productName}
             image={product.imageUrl}
-            price={(Number(product.newPrice) / 100).toFixed(2)}
+            price={(
+              Number(
+                typeof product.newPrice === "string"
+                  ? product.newPrice.replace(",", ".")
+                  : product.newPrice
+              ) / (product.store === "spar" ? 1 : 100)
+            ).toFixed(2)}
             daysLeft={product.daysLeft}
-            oldPrice={(Number(product.oldPrice) / 100).toFixed(2)}
+            oldPrice={(
+              Number(
+                typeof product.oldPrice === "string"
+                  ? product.oldPrice.replace(",", ".")
+                  : product.oldPrice
+              ) / (product.store === "spar" ? 1 : 100)
+            ).toFixed(2)}
           />
         ))}
       </div>

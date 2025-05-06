@@ -31,7 +31,9 @@ export default function Card({
           <span> {price}₾</span>
           <span className="old-price"> {oldPrice}₾</span>
         </div>
-        <span className="days-left">დარჩა {daysLeft} დღე</span>
+        <span className="days-left">
+          {daysLeft ? `დარჩა ${daysLeft} დღე` : ""}
+        </span>
       </div>
     </div>
   );
