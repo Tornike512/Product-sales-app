@@ -1,10 +1,11 @@
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 2rem;
 }
 
 .product-card {
+  padding: 18px;
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
@@ -20,22 +21,47 @@
 .product-image {
   height: 200px;
   width: 100%;
-  background-color: #eee;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.product-info {
-  padding: 1rem;
+.product-image img {
+  color: transparent;
+  width: auto;
+  height: 213px;
 }
 
 .product-title {
   font-weight: bold;
   margin-bottom: 0.5rem;
+  text-align: center;
+  font-size: 14px;
 }
 
 .product-price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #4caf50;
   font-weight: bold;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+}
+
+.old-price {
+  color: #ff0000;
+  text-decoration: line-through;
+  margin-left: 5px;
+}
+
+.days-left {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: darkgoldenrod;
 }

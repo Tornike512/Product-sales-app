@@ -14,17 +14,7 @@ interface Product {
   store: string;
 }
 
-interface SparProduct {
-  id: string;
-  productName: string;
-  imageUrl: string;
-  price: string;
-  source: string;
-  store: string;
-  category: string;
-}
-
-type StoreData = (Product | SparProduct)[];
+type StoreData = Product[];
 
 export function useGetAllProducts() {
   const [products, setProducts] = useState<StoreData | null>(null);

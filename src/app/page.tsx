@@ -18,11 +18,9 @@ export default function Home() {
             key={index}
             title={product.productName}
             image={product.imageUrl}
-            price={
-              "newPrice" in product
-                ? (Number(product.newPrice) / 100).toFixed(2)
-                : (Number(product.price) / 100).toFixed(2)
-            }
+            price={(Number(product.newPrice) / 100).toFixed(2)}
+            daysLeft={product.daysLeft}
+            oldPrice={(Number(product.oldPrice) / 100).toFixed(2)}
           />
         ))}
       </div>

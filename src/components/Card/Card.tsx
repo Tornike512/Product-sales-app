@@ -6,10 +6,14 @@ export default function Card({
   image,
   title,
   price,
+  daysLeft,
+  oldPrice,
 }: {
   image: string;
   title: string;
   price: string;
+  oldPrice?: string;
+  daysLeft?: string;
 }) {
   return (
     <div className="product-card">
@@ -23,7 +27,11 @@ export default function Card({
       </div>
       <div className="product-info">
         <div className="product-title">{title}</div>
-        <div className="product-price">{price}</div>
+        <div className="product-price">
+          <span> {price}₾</span>
+          <span className="old-price"> {oldPrice}₾</span>
+        </div>
+        <span className="days-left">დარჩა {daysLeft} დღე</span>
       </div>
     </div>
   );
