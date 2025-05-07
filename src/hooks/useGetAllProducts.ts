@@ -22,8 +22,20 @@ export function useGetAllProducts() {
   async function getAllProducts() {
     try {
       const response = await axios.get("http://localhost:3000/api/promotions");
-      setProducts(response.data);
-      return response.data;
+
+      const filteredProducts = response.data.filter(
+        (product: Product) =>
+          product.newPrice !== undefined &&
+          product.newPrice !== null &&
+          product.newPrice !== "NaN" &&
+          !isNaN(parseFloat(product.newPrice)) &&
+          product.imageUrl !== undefined &&
+          product.imageUrl !== null &&
+          product.imageUrl !== ""
+      );
+
+      setProducts(filteredProducts);
+      return filteredProducts;
     } catch (error) {
       console.error("Error fetching products:", error);
       throw error;

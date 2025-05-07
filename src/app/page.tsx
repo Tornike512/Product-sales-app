@@ -17,13 +17,14 @@ export default function Home() {
           <Card
             key={index}
             title={product.productName}
+            storeName={product.store}
             image={product.imageUrl}
             price={(
               Number(
                 typeof product.newPrice === "string"
                   ? product.newPrice.replace(",", ".")
                   : product.newPrice
-              ) / (product.store === "spar" ? 1 : 100)
+              ) / (product.store !== "nikora" ? 1 : 100)
             ).toFixed(2)}
             daysLeft={product.daysLeft}
             oldPrice={(
@@ -31,7 +32,7 @@ export default function Home() {
                 typeof product.oldPrice === "string"
                   ? product.oldPrice.replace(",", ".")
                   : product.oldPrice
-              ) / (product.store === "spar" ? 1 : 100)
+              ) / (product.store !== "nikora" ? 1 : 100)
             ).toFixed(2)}
           />
         ))}

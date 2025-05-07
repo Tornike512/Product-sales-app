@@ -8,32 +8,40 @@ export default function Card({
   price,
   daysLeft,
   oldPrice,
+  storeName,
 }: {
   image: string;
   title: string;
   price: string;
   oldPrice?: string;
   daysLeft?: string;
+  storeName?: string;
 }) {
   return (
     <div className="product-card">
       <div className="product-image">
         <Image
-          src={image}
+          src={image || "/placeholder.jpg"}
           width={500}
           height={300}
-          alt="Description of the image"
+          alt="Product image"
         />
       </div>
       <div className="product-info">
         <div className="product-title">{title}</div>
         <div className="product-price">
           <span> {price}₾</span>
-          <span className="old-price"> {oldPrice}₾</span>
+          {oldPrice !== "NaN" &&
+            oldPrice !== undefined &&
+            oldPrice !== null &&
+            oldPrice !== "" && (
+              <span className="old-price">{oldPrice}₾</span>
+            )}{" "}
         </div>
         <span className="days-left">
           {daysLeft ? `დარჩა ${daysLeft} დღე` : ""}
         </span>
+        <div className="store-name">{storeName}</div>
       </div>
     </div>
   );
