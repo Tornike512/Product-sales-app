@@ -12,6 +12,7 @@ const nextConfig = {
       "third.media.2nabiji.ge",
       "fifth.media.2nabiji.ge",
       "six.media.2nabiji.ge",
+      "static.spargeorgia.com",
     ],
   },
 };
