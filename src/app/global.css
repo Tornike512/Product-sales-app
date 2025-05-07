@@ -22,15 +22,18 @@ main {
   padding: 2rem;
 }
 
-.product-container h1 {
-  margin-bottom: 20px;
-}
-
 footer {
   background-color: #333;
   color: white;
   text-align: center;
   padding: 1rem;
+}
+
+.header-sort {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 @media (max-width: 768px) {

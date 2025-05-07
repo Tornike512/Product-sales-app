@@ -2,18 +2,28 @@
 
 import { useGetAllProducts } from "@/hooks/useGetAllProducts";
 import { useSelector } from "react-redux";
-import { AppState } from "@/store/store";
+import store, { AppState } from "@/store/store";
+import { useDispatch } from "react-redux";
 
 import Card from "@/components/Card/Card";
 
 import "./global.css";
+import { useEffect } from "react";
 
 export default function Home() {
   const { products } = useGetAllProducts();
+  const dispatch = useDispatch();
 
   const storeSelectedCategory = useSelector(
     (state: AppState) => state.currentCategory
   );
+
+  const selectedSort = useSelector((state: AppState) => state.sort);
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedSort = event.target.value;
+    dispatch({ type: "SORT", payload: selectedSort });
+  };
 
   const productsByCategory = products?.filter((product) => {
     return product.category === storeSelectedCategory;
@@ -21,7 +31,19 @@ export default function Home() {
 
   return (
     <>
-      <h1>Every Listed Product</h1>
+      <div className="header-sort">
+        <h1>Every Listed Product</h1>
+        <select value={selectedSort} onChange={handleSortChange}>
+          <option value="price-asc">Price ascending</option>
+          <option value="price-desc">Price descending</option>
+          <option value="discount-percentage-asc">
+            Discount Percentage ascending
+          </option>
+          <option value="discount-percentage-desc">
+            Discount Percentage descending
+          </option>
+        </select>
+      </div>
       <div className="product-grid">
         {productsByCategory?.map((product, index) => (
           <Card

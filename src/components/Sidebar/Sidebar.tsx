@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useGetAllProducts } from "@/hooks/useGetAllProducts";
-import { AppState } from "@/store/store";
 
 import "./Sidebar.css";
 
@@ -15,9 +14,6 @@ export default function Sidebar() {
   const { products } = useGetAllProducts();
 
   const dispatch = useDispatch();
-  const storeSelectedCategory = useSelector(
-    (state: AppState) => state.currentCategory
-  );
 
   const [selectedCategory, setSelectedCategory] = useState(
     searchParams.get("category") || null
