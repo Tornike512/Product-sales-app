@@ -1,6 +1,8 @@
 "use client";
 
 import { useGetAllProducts } from "@/hooks/useGetAllProducts";
+import { useSelector } from "react-redux";
+import { AppState } from "@/store/store";
 
 import Card from "@/components/Card/Card";
 
@@ -9,11 +11,19 @@ import "./global.css";
 export default function Home() {
   const { products } = useGetAllProducts();
 
+  const storeSelectedCategory = useSelector(
+    (state: AppState) => state.currentCategory
+  );
+
+  const productsByCategory = products?.filter((product) => {
+    return product.category === storeSelectedCategory;
+  });
+
   return (
     <>
       <h1>Every Listed Product</h1>
       <div className="product-grid">
-        {products?.map((product, index) => (
+        {productsByCategory?.map((product, index) => (
           <Card
             key={index}
             title={product.productName}

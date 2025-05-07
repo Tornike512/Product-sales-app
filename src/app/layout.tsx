@@ -1,5 +1,6 @@
 import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import { ReduxProvider } from "@/components/Providers/Providers";
 
 import "./global.css";
 
@@ -17,15 +18,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>
-          <Sidebar />
-          <section className="product-container">{children}</section>
-        </main>
+        <ReduxProvider>
+          <Header />
+          <main>
+            <Sidebar />
+            <section className="product-container">{children}</section>
+          </main>
 
-        <footer>
-          <p>&copy; 2025 MyShop. All rights reserved.</p>
-        </footer>
+          <footer>
+            <p>&copy; 2025 MyShop. All rights reserved.</p>
+          </footer>
+        </ReduxProvider>
       </body>
     </html>
   );

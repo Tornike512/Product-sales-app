@@ -2,7 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
 import { useGetAllProducts } from "@/hooks/useGetAllProducts";
+import { AppState } from "@/store/store";
 
 import "./Sidebar.css";
 
@@ -11,6 +13,11 @@ export default function Sidebar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { products } = useGetAllProducts();
+
+  const dispatch = useDispatch();
+  const storeSelectedCategory = useSelector(
+    (state: AppState) => state.currentCategory
+  );
 
   const [selectedCategory, setSelectedCategory] = useState(
     searchParams.get("category") || null
@@ -36,6 +43,8 @@ export default function Sidebar() {
 
   const handleCategoryClick = (store: string) => {
     const categoryParam = store.toLowerCase().replace(/ /g, "_");
+
+    dispatch({ type: "CATEGORY", payload: categoryParam });
 
     const params = new URLSearchParams(searchParams);
     params.set("category", categoryParam);
