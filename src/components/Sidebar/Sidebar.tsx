@@ -53,7 +53,7 @@ export default function Sidebar() {
 
   return (
     <aside className="sidebar">
-      <h2>Stores</h2>
+      <h2>Categories</h2>
       <ul className="category-list">
         {upperCaseStores()?.map((store, index) => (
           <li key={index} className="category-item">

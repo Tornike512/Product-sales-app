@@ -18,8 +18,8 @@ interface SORT extends Action<typeof SORT> {
 export type AppAction = IncrementAction | SORT;
 
 const initialState: AppState = {
-  currentCategory: "fish",
-  sort: "price-asc",
+  currentCategory: "",
+  sort: "discount-percentage-desc",
 };
 
 function reducer(state = initialState, action: AppAction): AppState {
