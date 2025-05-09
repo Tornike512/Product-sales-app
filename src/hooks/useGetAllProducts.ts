@@ -22,7 +22,7 @@ export function useGetAllProducts() {
   async function getAllProducts() {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/promotions?page=2&limit=10"
+        "http://localhost:3000/api/promotions?page=1&limit=10"
       );
 
       setProducts(response.data.promotions);

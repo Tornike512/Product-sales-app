@@ -1,10 +1,8 @@
-// hooks/useGetProductsByCategory.js or .ts
 import { useState, useEffect } from "react";
 
 export function useGetProductsByCategory(category: string | null) {
   const [productsByCategory, setProductsByCategory] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (!category) {
@@ -27,7 +25,6 @@ export function useGetProductsByCategory(category: string | null) {
         setProductsByCategory(data);
       } catch (err) {
         console.error("Error fetching products by category:", err);
-        setError(err.message);
       } finally {
         setLoading(false);
       }
@@ -36,5 +33,5 @@ export function useGetProductsByCategory(category: string | null) {
     fetchProductsByCategory();
   }, [category]);
 
-  return { productsByCategory, loading, error };
+  return { productsByCategory, loading };
 }

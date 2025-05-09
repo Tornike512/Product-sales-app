@@ -38,6 +38,10 @@ export default function Home() {
     }, 300);
   };
 
+  const isNikoraStore = (storeName: string) => {
+    return storeName && storeName.toLowerCase().includes("nikora");
+  };
+
   const getDiscountPercentage = (product: any) => {
     if (product.discountPercentage !== undefined) {
       return Number(product.discountPercentage);
@@ -64,28 +68,25 @@ export default function Home() {
     : products;
 
   const sortedProducts = displayedProducts?.slice().sort((a, b) => {
-    const aPrice =
-      Number(
-        typeof a.newPrice === "string"
-          ? a.newPrice.replace(",", ".")
-          : a.newPrice
-      ) / (a.store !== "nikora" ? 1 : 100);
+    const aPrice = Number(
+      typeof a.newPrice === "string" ? a.newPrice.replace(",", ".") : a.newPrice
+    );
 
-    const bPrice =
-      Number(
-        typeof b.newPrice === "string"
-          ? b.newPrice.replace(",", ".")
-          : b.newPrice
-      ) / (b.store !== "nikora" ? 1 : 100);
+    const bPrice = Number(
+      typeof b.newPrice === "string" ? b.newPrice.replace(",", ".") : b.newPrice
+    );
+
+    const finalAPrice = isNikoraStore(a.store) ? aPrice / 100 : aPrice;
+    const finalBPrice = isNikoraStore(b.store) ? bPrice / 100 : bPrice;
 
     const aDiscountPercentage = getDiscountPercentage(a);
     const bDiscountPercentage = getDiscountPercentage(b);
 
     switch (selectedSort) {
       case "price-asc":
-        return aPrice - bPrice;
+        return finalAPrice - finalBPrice;
       case "price-desc":
-        return bPrice - aPrice;
+        return finalBPrice - finalAPrice;
       case "discount-percentage-asc":
         return aDiscountPercentage - bDiscountPercentage;
       case "discount-percentage-desc":
@@ -159,29 +160,36 @@ export default function Home() {
             <div className="loader"></div>
           </div>
         )}
-        {sortedProducts?.map((product, index) => (
-          <Card
-            key={index}
-            title={product.productName}
-            storeName={product.store}
-            image={product.imageUrl}
-            price={(
-              Number(
-                typeof product.newPrice === "string"
-                  ? product.newPrice.replace(",", ".")
-                  : product.newPrice
-              ) / (product.store !== "nikora" ? 1 : 100)
-            ).toFixed(2)}
-            daysLeft={product.daysLeft}
-            oldPrice={(
-              Number(
-                typeof product.oldPrice === "string"
-                  ? product.oldPrice.replace(",", ".")
-                  : product.oldPrice
-              ) / (product.store !== "nikora" ? 1 : 100)
-            ).toFixed(2)}
-          />
-        ))}
+        {sortedProducts?.map((product, index) => {
+          const rawNewPrice = Number(
+            typeof product.newPrice === "string"
+              ? product.newPrice.replace(",", ".")
+              : product.newPrice
+          );
+
+          const rawOldPrice = Number(
+            typeof product.oldPrice === "string"
+              ? product.oldPrice.replace(",", ".")
+              : product.oldPrice
+          );
+
+          const shouldDivide = isNikoraStore(product.store);
+
+          const finalNewPrice = shouldDivide ? rawNewPrice / 100 : rawNewPrice;
+          const finalOldPrice = shouldDivide ? rawOldPrice / 100 : rawOldPrice;
+
+          return (
+            <Card
+              key={index}
+              title={product.productName}
+              storeName={product.store}
+              image={product.imageUrl}
+              price={finalNewPrice.toFixed(2)}
+              daysLeft={product.daysLeft}
+              oldPrice={finalOldPrice.toFixed(2)}
+            />
+          );
+        })}
       </div>
     </>
   );
