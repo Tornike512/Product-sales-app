@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { useGetAllProducts } from "@/hooks/useGetAllProducts";
+import { useGetAllCategories } from "@/hooks/useGetAllCategories";
 
 import "./Sidebar.css";
 
@@ -11,7 +11,7 @@ export default function Sidebar() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const { products } = useGetAllProducts();
+  const { categories } = useGetAllCategories();
 
   const dispatch = useDispatch();
 
@@ -19,23 +19,16 @@ export default function Sidebar() {
     searchParams.get("category") || null
   );
 
+  const formattedCategory = categories.map((category) => {
+    return category
+      .toLowerCase()
+      .replace(/_/g, " ")
+      .replace(/^[a-z]/, (match) => match.toUpperCase());
+  });
+
   useEffect(() => {
     setSelectedCategory(searchParams.get("category") || null);
   }, [searchParams]);
-
-  const upperCaseStores = () => {
-    const stores = products?.map((store) => {
-      return store.category;
-    });
-
-    const set = new Set(stores);
-
-    const upperCaseStores = [...set].map((store) => {
-      return store.charAt(0).toUpperCase() + store.slice(1).replace(/_/g, " ");
-    });
-
-    return upperCaseStores;
-  };
 
   const handleCategoryClick = (store: string) => {
     const categoryParam = store.toLowerCase().replace(/ /g, "_");
@@ -55,7 +48,7 @@ export default function Sidebar() {
     <aside className="sidebar">
       <h2>Categories</h2>
       <ul className="category-list">
-        {upperCaseStores()?.map((store, index) => (
+        {formattedCategory?.map((store, index) => (
           <li key={index} className="category-item">
             <a
               className={`category-link ${
