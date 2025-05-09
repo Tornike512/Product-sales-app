@@ -1,5 +1,6 @@
 "use client";
 
+import { ChangeEvent, useEffect, useState } from "react";
 import { useGetAllProducts } from "@/hooks/useGetAllProducts";
 import { useSelector } from "react-redux";
 import { AppState } from "@/store/store";
@@ -8,9 +9,10 @@ import { useDispatch } from "react-redux";
 import Card from "@/components/Card/Card";
 
 import "./global.css";
-import { useEffect } from "react";
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(false);
+
   const { products } = useGetAllProducts();
   const dispatch = useDispatch();
 
@@ -20,18 +22,22 @@ export default function Home() {
 
   const selectedSort = useSelector((state: AppState) => state.sort);
 
-  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleSortChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const selectedSort = event.target.value;
+    setIsLoading(true);
+
     dispatch({ type: "SORT", payload: selectedSort });
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 300);
   };
 
-  const getDiscountPercentage = (product) => {
-    // If discountPercentage is already available in the product object, use it
+  const getDiscountPercentage = (product: any) => {
     if (product.discountPercentage !== undefined) {
       return Number(product.discountPercentage);
     }
 
-    // Otherwise calculate it
     const old = Number(
       typeof product.oldPrice === "string"
         ? product.oldPrice.replace(",", ".")
@@ -93,18 +99,61 @@ export default function Home() {
     <>
       <div className="header-sort">
         <h1>{storeSelectedCategory ? "Category Products" : "Best Deals"}</h1>
-        <select value={selectedSort} onChange={handleSortChange}>
-          <option value="price-asc">Price ascending</option>
-          <option value="price-desc">Price descending</option>
-          <option value="discount-percentage-asc">
-            Discount Percentage ascending
-          </option>
-          <option value="discount-percentage-desc">
-            Discount Percentage descending
-          </option>
-        </select>
+
+        <div className="custom-select-container">
+          <select
+            className="custom-select"
+            value={selectedSort}
+            onChange={handleSortChange}
+            disabled={isLoading}
+          >
+            <option value="price-asc">Price ascending</option>
+            <option value="price-desc">Price descending</option>
+            <option value="discount-percentage-asc">
+              Discount Percentage ascending
+            </option>
+            <option value="discount-percentage-desc">
+              Discount Percentage descending
+            </option>
+          </select>
+          {isLoading ? (
+            <svg
+              className="select-icon animate-spin"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+          ) : (
+            <svg
+              className="select-icon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          )}
+        </div>
       </div>
-      <div className="product-grid">
+      <div className="product-grid relative">
+        {isLoading && (
+          <div className="loading-overlay">
+            <div className="loader"></div>
+          </div>
+        )}
         {sortedProducts?.map((product, index) => (
           <Card
             key={index}
