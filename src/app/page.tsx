@@ -2,6 +2,7 @@
 
 import { ChangeEvent, useEffect, useState } from "react";
 import { useGetAllProducts } from "@/hooks/useGetAllProducts";
+import { useGetProductsByCategory } from "@/hooks/useGetProductsByCategory";
 import { useSelector } from "react-redux";
 import { AppState } from "@/store/store";
 import { useDispatch } from "react-redux";
@@ -18,6 +19,10 @@ export default function Home() {
 
   const storeSelectedCategory = useSelector(
     (state: AppState) => state.currentCategory
+  );
+
+  const { productsByCategory } = useGetProductsByCategory(
+    storeSelectedCategory
   );
 
   const selectedSort = useSelector((state: AppState) => state.sort);
@@ -55,7 +60,7 @@ export default function Home() {
   };
 
   const displayedProducts = storeSelectedCategory
-    ? products?.filter((product) => product.category === storeSelectedCategory)
+    ? productsByCategory
     : products;
 
   const sortedProducts = displayedProducts?.slice().sort((a, b) => {

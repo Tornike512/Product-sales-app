@@ -25,19 +25,8 @@ export function useGetAllProducts() {
         "http://localhost:3000/api/promotions?page=2&limit=10"
       );
 
-      const filteredProducts = response.data.promotions.filter(
-        (product: Product) =>
-          product.newPrice !== undefined &&
-          product.newPrice !== null &&
-          product.newPrice !== "NaN" &&
-          !isNaN(parseFloat(product.newPrice)) &&
-          product.imageUrl !== undefined &&
-          product.imageUrl !== null &&
-          product.imageUrl !== ""
-      );
-
-      setProducts(filteredProducts);
-      return filteredProducts;
+      setProducts(response.data.promotions);
+      return response.data.promotions;
     } catch (error) {
       console.error("Error fetching products:", error);
       throw error;
