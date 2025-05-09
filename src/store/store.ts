@@ -27,8 +27,6 @@ function reducer(state = initialState, action: AppAction): AppState {
     case CATEGORY:
       return { ...state, currentCategory: action.payload };
     case SORT:
-      console.log(state);
-
       return { ...state, sort: action.payload };
     default:
       return state;

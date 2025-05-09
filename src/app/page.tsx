@@ -98,7 +98,7 @@ export default function Home() {
   return (
     <>
       <div className="header-sort">
-        <h1>{storeSelectedCategory ? "Category Products" : "Best Deals"}</h1>
+        <h1>Products</h1>
 
         <div className="custom-select-container">
           <select
