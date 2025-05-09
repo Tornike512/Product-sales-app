@@ -21,9 +21,11 @@ export function useGetAllProducts() {
 
   async function getAllProducts() {
     try {
-      const response = await axios.get("http://localhost:3000/api/promotions");
+      const response = await axios.get(
+        "http://localhost:3000/api/promotions?page=2&limit=10"
+      );
 
-      const filteredProducts = response.data.filter(
+      const filteredProducts = response.data.promotions.filter(
         (product: Product) =>
           product.newPrice !== undefined &&
           product.newPrice !== null &&
