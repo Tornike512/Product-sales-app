@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useGetAllCategories } from "@/hooks/useGetAllCategories";
+import Link from "next/link";
 
 import "./Sidebar.css";
 
@@ -37,11 +38,11 @@ export default function Sidebar() {
 
     const params = new URLSearchParams(searchParams);
     params.set("category", categoryParam);
-
-    setSelectedCategory(store);
-
     const url = `${pathname}?${params.toString()}`;
-    router.push(url);
+
+    router.replace(url, { scroll: false });
+
+    setSelectedCategory(categoryParam);
   };
 
   return (
@@ -50,14 +51,18 @@ export default function Sidebar() {
       <ul className="category-list">
         {formattedCategory?.map((store, index) => (
           <li key={index} className="category-item">
-            <a
+            <Link
+              href="#"
               className={`category-link ${
                 selectedCategory === store ? "active" : ""
               }`}
-              onClick={() => handleCategoryClick(store)}
+              onClick={(e) => {
+                e.preventDefault();
+                handleCategoryClick(store);
+              }}
             >
               {store}
-            </a>
+            </Link>
           </li>
         ))}
       </ul>

@@ -34,7 +34,8 @@ export default function Card({
           {oldPrice !== "NaN" &&
             oldPrice !== undefined &&
             oldPrice !== null &&
-            oldPrice !== "" && (
+            oldPrice !== "" &&
+            oldPrice !== "0.00" && (
               <span className="old-price">{oldPrice}₾</span>
             )}{" "}
         </div>

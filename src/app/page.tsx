@@ -6,6 +6,7 @@ import { useGetProductsByCategory } from "@/hooks/useGetProductsByCategory";
 import { useSelector } from "react-redux";
 import { AppState } from "@/store/store";
 import { useDispatch } from "react-redux";
+import ProductsSkeleton from "@/components/ProductsSkeleton/ProductsSkeleton";
 
 import Card from "@/components/Card/Card";
 
@@ -21,7 +22,7 @@ export default function Home() {
     (state: AppState) => state.currentCategory
   );
 
-  const { productsByCategory } = useGetProductsByCategory(
+  const { productsByCategory, loading } = useGetProductsByCategory(
     storeSelectedCategory
   );
 
@@ -100,6 +101,10 @@ export default function Home() {
       dispatch({ type: "SORT", payload: "discount-percentage-desc" });
     }
   }, [storeSelectedCategory, selectedSort, dispatch]);
+
+  if (loading) {
+    return <ProductsSkeleton />;
+  }
 
   return (
     <>
