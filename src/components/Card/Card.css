@@ -5,6 +5,7 @@
 }
 
 .product-card {
+  position: relative;
   padding: 18px;
   background-color: white;
   border-radius: 8px;
@@ -65,4 +66,15 @@
   justify-content: center;
   font-weight: bold;
   color: darkgoldenrod;
+}
+
+.store-name {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+}
+
+.store-name img {
+  width: 60px;
+  height: auto;
 }

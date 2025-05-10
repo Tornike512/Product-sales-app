@@ -1,4 +1,7 @@
 import Image from "next/image";
+import nikoraLogo from "../../../public/images/nikora.png";
+import oriNabijiLogo from "../../../public/images/oriNabiji.png";
+import sparLogo from "../../../public/images/spar.png";
 
 import "../Card/Card.css";
 
@@ -17,6 +20,25 @@ export default function Card({
   daysLeft?: string;
   storeName?: string;
 }) {
+  const renderImageByStore = (storeName: string | undefined) => {
+    switch (storeName) {
+      case "nikora":
+        return nikoraLogo;
+      case "Nikora":
+        return nikoraLogo;
+      case "2nabiji":
+        return oriNabijiLogo;
+      case "Spar":
+        return sparLogo;
+      case "smart":
+        return "/smart.png";
+      default:
+        return "/placeholder.jpg";
+    }
+  };
+
+  console.log(storeName);
+
   return (
     <div className="product-card">
       <div className="product-image">
@@ -43,7 +65,14 @@ export default function Card({
         <span className="days-left">
           {daysLeft ? `დარჩა ${daysLeft} დღე` : ""}
         </span>
-        <div className="store-name">{storeName}</div>
+        <div className="store-name">
+          <Image
+            width={100}
+            height={100}
+            alt="Store Name"
+            src={renderImageByStore(storeName)}
+          />
+        </div>
       </div>
     </div>
   );
