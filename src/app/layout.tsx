@@ -26,7 +26,7 @@ export default function RootLayout({
           </main>
 
           <footer>
-            <p>&copy; 2025 MyShop. All rights reserved.</p>
+            <p>&copy; 2025 SaleStores. All rights reserved.</p>
           </footer>
         </ReduxProvider>
       </body>

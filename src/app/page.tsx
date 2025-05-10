@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 
 import ProductsSkeleton from "@/components/ProductsSkeleton/ProductsSkeleton";
 import Card from "@/components/Card/Card";
+import HomePage from "@/components/Home/HomePage";
 
 import "./global.css";
 
@@ -101,6 +102,10 @@ export default function Home() {
         return bDiscountPercentage - aDiscountPercentage;
     }
   });
+
+  if (storeSelectedCategory === "") {
+    return <HomePage />;
+  }
 
   if (loading || loadingAll) {
     return <ProductsSkeleton />;

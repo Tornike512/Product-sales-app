@@ -1,6 +1,8 @@
 "use client";
 import { useDispatch } from "react-redux";
+import mainLogo from "../../../public/images/salesStores.png";
 
+import Image from "next/image";
 import Link from "next/link";
 
 import "@/components/Header/Header.css";
@@ -21,7 +23,7 @@ export default function Header() {
         onClick={handleHomeNavigation}
         className="logo"
       >
-        MyShop
+        <Image src={mainLogo} width={100} height={100} alt="Main logo" />
       </Link>
       <div className="search-container">
         <input type="text" placeholder="Search products..." />

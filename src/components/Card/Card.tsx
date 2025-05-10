@@ -37,8 +37,6 @@ export default function Card({
     }
   };
 
-  console.log(storeName);
-
   return (
     <div className="product-card">
       <div className="product-image">
