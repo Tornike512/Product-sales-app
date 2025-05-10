@@ -16,52 +16,60 @@ export default function Sidebar() {
 
   const dispatch = useDispatch();
 
-  const [selectedCategory, setSelectedCategory] = useState(
-    searchParams.get("category") || null
-  );
+  const categoryParam = searchParams.get("category") || null;
+  const [selectedCategory, setSelectedCategory] = useState(categoryParam);
 
-  const formattedCategory = categories.map((category) => {
-    return category
-      .toLowerCase()
-      .replace(/_/g, " ")
-      .replace(/^[a-z]/, (match) => match.toUpperCase());
-  });
-
+  // Update selected category when URL changes
   useEffect(() => {
-    setSelectedCategory(searchParams.get("category") || null);
-  }, [searchParams]);
+    const newCategory = searchParams.get("category") || null;
+    setSelectedCategory(newCategory);
 
-  const handleCategoryClick = (store: string) => {
-    const categoryParam = store.toLowerCase().replace(/ /g, "_");
+    if (newCategory) {
+      dispatch({ type: "CATEGORY", payload: newCategory });
+    }
+  }, [searchParams, dispatch]);
+
+  const handleCategoryClick = (category: string) => {
+    const categoryParam = category.toLowerCase().replace(/ /g, "_");
 
     dispatch({ type: "CATEGORY", payload: categoryParam });
 
     const params = new URLSearchParams(searchParams);
     params.set("category", categoryParam);
     const url = `${pathname}?${params.toString()}`;
-
     router.replace(url, { scroll: false });
 
     setSelectedCategory(categoryParam);
   };
 
+  const formattedCategories = categories.map((category) => {
+    return {
+      displayName: category
+        .toLowerCase()
+        .replace(/_/g, " ")
+        .replace(/^[a-z]/, (match) => match.toUpperCase()),
+      paramName: category.toLowerCase().replace(/ /g, "_"),
+    };
+  });
+
   return (
     <aside className="sidebar">
       <h2>Categories</h2>
       <ul className="category-list">
-        {formattedCategory?.map((store, index) => (
+        {formattedCategories?.map((category, index) => (
           <li key={index} className="category-item">
             <Link
+              rel="preload"
               href="#"
               className={`category-link ${
-                selectedCategory === store ? "active" : ""
+                selectedCategory === category.paramName ? "active" : ""
               }`}
               onClick={(e) => {
                 e.preventDefault();
-                handleCategoryClick(store);
+                handleCategoryClick(category.displayName);
               }}
             >
-              {store}
+              {category.displayName}
             </Link>
           </li>
         ))}

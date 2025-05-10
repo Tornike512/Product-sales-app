@@ -64,6 +64,12 @@ export default function Home() {
     return ((old - current) / old) * 100;
   };
 
+  useEffect(() => {
+    if (!storeSelectedCategory && selectedSort !== "discount-percentage-desc") {
+      dispatch({ type: "SORT", payload: "discount-percentage-desc" });
+    }
+  }, [storeSelectedCategory, selectedSort, dispatch]);
+
   const displayedProducts = storeSelectedCategory
     ? productsByCategory
     : products;
@@ -95,19 +101,6 @@ export default function Home() {
         return bDiscountPercentage - aDiscountPercentage;
     }
   });
-
-  useEffect(() => {
-    if (!storeSelectedCategory && selectedSort !== "discount-percentage-desc") {
-      dispatch({ type: "SORT", payload: "discount-percentage-desc" });
-    }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const category = urlParams.get("category");
-
-    if (category) {
-      dispatch({ type: "CATEGORY", payload: category });
-    }
-  }, [storeSelectedCategory, selectedSort, dispatch]);
 
   if (loading || loadingAll) {
     return <ProductsSkeleton />;

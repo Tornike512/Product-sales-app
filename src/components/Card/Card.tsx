@@ -24,6 +24,7 @@ export default function Card({
           src={image || "/placeholder.jpg"}
           width={500}
           height={300}
+          loading="lazy"
           alt="Product image"
         />
       </div>

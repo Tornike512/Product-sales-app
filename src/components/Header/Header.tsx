@@ -15,7 +15,12 @@ export default function Header() {
 
   return (
     <header>
-      <Link href={"/"} onClick={handleHomeNavigation} className="logo">
+      <Link
+        rel="preload"
+        href={"/"}
+        onClick={handleHomeNavigation}
+        className="logo"
+      >
         MyShop
       </Link>
       <div className="search-container">
