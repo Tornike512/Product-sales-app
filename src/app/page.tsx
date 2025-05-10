@@ -6,8 +6,8 @@ import { useGetProductsByCategory } from "@/hooks/useGetProductsByCategory";
 import { useSelector } from "react-redux";
 import { AppState } from "@/store/store";
 import { useDispatch } from "react-redux";
-import ProductsSkeleton from "@/components/ProductsSkeleton/ProductsSkeleton";
 
+import ProductsSkeleton from "@/components/ProductsSkeleton/ProductsSkeleton";
 import Card from "@/components/Card/Card";
 
 import "./global.css";
@@ -15,7 +15,7 @@ import "./global.css";
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
 
-  const { products } = useGetAllProducts();
+  const { products, loadingAll } = useGetAllProducts();
   const dispatch = useDispatch();
 
   const storeSelectedCategory = useSelector(
@@ -100,9 +100,16 @@ export default function Home() {
     if (!storeSelectedCategory && selectedSort !== "discount-percentage-desc") {
       dispatch({ type: "SORT", payload: "discount-percentage-desc" });
     }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const category = urlParams.get("category");
+
+    if (category) {
+      dispatch({ type: "CATEGORY", payload: category });
+    }
   }, [storeSelectedCategory, selectedSort, dispatch]);
 
-  if (loading) {
+  if (loading || loadingAll) {
     return <ProductsSkeleton />;
   }
 

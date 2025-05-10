@@ -18,11 +18,13 @@ type StoreData = Product[];
 
 export function useGetAllProducts() {
   const [products, setProducts] = useState<StoreData | null>(null);
+  const [loadingAll, setLoadingAll] = useState<boolean>(true);
 
   async function getAllProducts() {
+    setLoadingAll(true);
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/promotions?page=1&limit=10"
+        "http://localhost:3000/api/promotions?page=1&limit=20"
       );
 
       setProducts(response.data.promotions);
@@ -30,6 +32,8 @@ export function useGetAllProducts() {
     } catch (error) {
       console.error("Error fetching products:", error);
       throw error;
+    } finally {
+      setLoadingAll(false);
     }
   }
 
@@ -37,5 +41,5 @@ export function useGetAllProducts() {
     getAllProducts();
   }, []);
 
-  return { products };
+  return { products, loadingAll };
 }
