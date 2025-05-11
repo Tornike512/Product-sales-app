@@ -52,8 +52,6 @@ export default function Sidebar() {
     };
   });
 
-  console.log(selectedCategory);
-
   return (
     <aside className="sidebar">
       <h2>Categories</h2>

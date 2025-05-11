@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-
 import axios from "axios";
 
 interface Product {
@@ -19,18 +18,25 @@ type StoreData = Product[];
 export function useGetAllProducts() {
   const [products, setProducts] = useState<StoreData | null>(null);
   const [loadingAll, setLoadingAll] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   async function getAllProducts() {
     setLoadingAll(true);
+    setError(null);
     try {
-      const response = await axios.get(
-        "http://localhost:3000/api/promotions?page=1&limit=20"
-      );
+      const response = await axios.get(`http://localhost:3000/api/promotions`);
 
-      setProducts(response.data.promotions);
-      return response.data.promotions;
+      if (response.data && response.data.promotions) {
+        setProducts(response.data.promotions);
+        return response.data.promotions;
+      } else {
+        console.error("Unexpected API response format:", response.data);
+        setError("API returned an unexpected format");
+        return [];
+      }
     } catch (error) {
       console.error("Error fetching products:", error);
+      setError("Failed to fetch products");
       throw error;
     } finally {
       setLoadingAll(false);
@@ -41,5 +47,5 @@ export function useGetAllProducts() {
     getAllProducts();
   }, []);
 
-  return { products, loadingAll };
+  return { products, loadingAll, error };
 }
