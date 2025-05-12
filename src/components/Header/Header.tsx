@@ -1,19 +1,19 @@
 "use client";
 import { useDispatch } from "react-redux";
 import { ChangeEvent, useState } from "react";
-import { useDebounce } from "@/hooks/useDebounce";
+import { useRouter } from "next/navigation";
 import mainLogo from "../../../public/images/salesStores.png";
 import Image from "next/image";
 import Link from "next/link";
+import SearchModal from "../SearchModal/SearchModal";
 
 import "@/components/Header/Header.css";
-import ProductsPage from "@/views/ProductsPage/ProductsPage";
-import SearchModal from "../SearchModal/SearchModal";
 
 export default function Header() {
   const dispatch = useDispatch();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const router = useRouter();
 
   const handleHomeNavigation = () => {
     dispatch({ type: "CATEGORY", payload: "" });
@@ -30,11 +30,13 @@ export default function Header() {
 
   const handleSearch = (term: string) => {
     dispatch({ type: "TERM", payload: term });
+    router.push("/products-page");
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchTerm(value);
+    dispatch({ type: "TERM", payload: value });
   };
 
   return (
@@ -45,10 +47,10 @@ export default function Header() {
             className="darkened-overlay"
             onClick={() => setIsInputFocused(false)}
           />
+          <SearchModal />
         </>
       )}
       <header>
-        <SearchModal />
         <Link
           rel="preload"
           href={"/"}

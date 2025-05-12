@@ -62,8 +62,6 @@ export default function SearchModal() {
     );
   }
 
-  console.log(searchProducts);
-
   return (
     <div className="search-modal-container">
       <h2 className="search-modal-title">Featured Products</h2>
