@@ -87,7 +87,7 @@ export default function SearchModal() {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className="search-modal-product-image">
-                <Image src={product?.imageUrl} alt={product.productName} />
+                <Image fill src={product?.imageUrl} alt={product.productName} />
                 {discountPercentage > 0 && (
                   <div className="search-modal-discount-badge">
                     -{discountPercentage}%

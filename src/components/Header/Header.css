@@ -32,6 +32,7 @@ header {
 
 .search-container {
   display: flex;
+  align-items: center;
   width: 50%;
   max-width: 500px;
   position: relative;
@@ -39,7 +40,7 @@ header {
 }
 
 .search-container input[type="text"] {
-  padding: 10px 15px;
+  padding: 11px 15px;
   border: 2px solid #e9ecef;
   border-radius: 6px 0 0 6px;
   font-size: 0.95rem;
@@ -60,7 +61,7 @@ header {
   background-color: #f8f9fa;
   color: #2f855a;
   border: none;
-  padding: 10px 20px;
+  padding: 12px 20px;
   border-radius: 0 6px 6px 0;
   cursor: pointer;
   font-weight: 600;

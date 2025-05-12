@@ -47,6 +47,7 @@ export default function Card({
           loading="lazy"
           alt="Product image"
         />
+        <button className="add-to-cart-btn">Add to Cart</button>
       </div>
       <div className="product-info">
         <div className="product-title">{title}</div>

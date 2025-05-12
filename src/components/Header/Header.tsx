@@ -8,6 +8,7 @@ import mainLogo from "../../../public/images/salesStores.png";
 import Image from "next/image";
 import Link from "next/link";
 import SearchModal from "../SearchModal/SearchModal";
+import Cart from "../Cart/Cart";
 
 import "@/components/Header/Header.css";
 
@@ -71,6 +72,7 @@ export default function Header() {
             onBlur={handleInputBlur}
           />
           <button onClick={() => handleSearch(searchTerm)}>Search</button>
+          <Cart />
         </div>
       </header>
     </>
