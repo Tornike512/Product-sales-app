@@ -1,6 +1,7 @@
 import Header from "@/components/Header/Header";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { ReduxProvider } from "@/components/Providers/Providers";
+import { Suspense } from "react";
 
 import "./global.css";
 
@@ -21,7 +22,9 @@ export default function RootLayout({
         <ReduxProvider>
           <Header />
           <main>
-            <Sidebar />
+            <Suspense fallback={<div>Loading sidebar...</div>}>
+              <Sidebar />
+            </Suspense>
             <section className="product-container">{children}</section>
           </main>
 

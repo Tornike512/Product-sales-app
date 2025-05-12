@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-interface Product {
+export interface Product {
   productName: string;
   imageUrl: string;
   daysLeft: string;

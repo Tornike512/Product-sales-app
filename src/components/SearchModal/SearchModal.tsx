@@ -2,12 +2,14 @@ import { useGetAllProducts } from "@/hooks/useGetAllProducts";
 import { useState } from "react";
 import { AppState } from "@/store/store";
 import { useSelector } from "react-redux";
+import { Product } from "@/hooks/useGetAllProducts";
 
 import "../SearchModal/SearchModal.css";
+import Image from "next/image";
 
 export default function SearchModal() {
   const { products } = useGetAllProducts();
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const term = useSelector((state: AppState) => state.term);
 
   const isNikoraStore = (storeName: string) => {
@@ -25,7 +27,7 @@ export default function SearchModal() {
     return finalPrice.toFixed(2);
   };
 
-  const getDiscountPercentage = (product: any) => {
+  const getDiscountPercentage = (product: Product) => {
     if (product.discountPercentage !== undefined) {
       return Number(product.discountPercentage);
     }
@@ -47,7 +49,7 @@ export default function SearchModal() {
   };
 
   const searchProducts = products
-    ? products.filter((product) => {
+    ? products.filter((product: Product) => {
         return product.productName.includes(term);
       })
     : [];
@@ -66,7 +68,7 @@ export default function SearchModal() {
     <div className="search-modal-container">
       <h2 className="search-modal-title">Featured Products</h2>
       <div className="search-modal-grid">
-        {searchProducts?.map((product, index: any) => {
+        {searchProducts?.map((product: Product, index: number) => {
           const formattedNewPrice = formatPrice(
             product.newPrice,
             product.store
@@ -85,7 +87,7 @@ export default function SearchModal() {
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <div className="search-modal-product-image">
-                <img src={product?.imageUrl} alt={product.productName} />
+                <Image src={product?.imageUrl} alt={product.productName} />
                 {discountPercentage > 0 && (
                   <div className="search-modal-discount-badge">
                     -{discountPercentage}%

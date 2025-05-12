@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, usePathname, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useGetAllCategories } from "@/hooks/useGetAllCategories";
 import Link from "next/link";
@@ -10,7 +10,6 @@ import "./Sidebar.css";
 
 export default function Sidebar() {
   const router = useRouter();
-  const pathname = usePathname();
   const searchParams = useSearchParams();
   const { categories } = useGetAllCategories();
 
@@ -19,7 +18,6 @@ export default function Sidebar() {
   const categoryParam = searchParams.get("category") || null;
   const [selectedCategory, setSelectedCategory] = useState(categoryParam);
 
-  // Update selected category when URL changes
   useEffect(() => {
     const newCategory = searchParams.get("category") || null;
     setSelectedCategory(newCategory);
@@ -36,7 +34,7 @@ export default function Sidebar() {
 
     const params = new URLSearchParams(searchParams);
     params.set("category", categoryParam);
-    const url = `${pathname}?${params.toString()}`;
+    const url = `/?${params.toString()}`;
     router.replace(url, { scroll: false });
 
     setSelectedCategory(categoryParam);

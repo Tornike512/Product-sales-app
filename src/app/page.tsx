@@ -6,6 +6,7 @@ import { useGetProductsByCategory } from "@/hooks/useGetProductsByCategory";
 import { useSelector } from "react-redux";
 import { AppState } from "@/store/store";
 import { useDispatch } from "react-redux";
+import { Product } from "@/hooks/useGetAllProducts";
 
 import ProductsSkeleton from "@/components/ProductsSkeleton/ProductsSkeleton";
 import Card from "@/components/Card/Card";
@@ -44,7 +45,7 @@ export default function Home() {
     return storeName && storeName.toLowerCase().includes("nikora");
   };
 
-  const getDiscountPercentage = (product: any) => {
+  const getDiscountPercentage = (product: Product) => {
     if (product.discountPercentage !== undefined) {
       return Number(product.discountPercentage);
     }

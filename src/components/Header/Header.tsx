@@ -2,6 +2,8 @@
 import { useDispatch } from "react-redux";
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import { SEARCH_KEY } from "@/store/store";
+
 import mainLogo from "../../../public/images/salesStores.png";
 import Image from "next/image";
 import Link from "next/link";
@@ -29,7 +31,7 @@ export default function Header() {
   };
 
   const handleSearch = (term: string) => {
-    dispatch({ type: "TERM", payload: term });
+    dispatch({ type: SEARCH_KEY, payload: term });
     router.push("/products-page");
   };
 
