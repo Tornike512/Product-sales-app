@@ -1,4 +1,8 @@
+import { ADD_TO_CART } from "@/store/store";
+import { useDispatch } from "react-redux";
+
 import Image from "next/image";
+
 import nikoraLogo from "../../../public/images/nikora.png";
 import oriNabijiLogo from "../../../public/images/oriNabiji.png";
 import sparLogo from "../../../public/images/spar.png";
@@ -20,6 +24,8 @@ export default function Card({
   daysLeft?: string;
   storeName?: string;
 }) {
+  const dispatch = useDispatch();
+
   const renderImageByStore = (storeName: string | undefined) => {
     switch (storeName) {
       case "nikora":
@@ -37,6 +43,12 @@ export default function Card({
     }
   };
 
+  const handleAddToCart = (productName: string) => {
+    console.log(productName);
+
+    dispatch({ type: ADD_TO_CART, payload: productName });
+  };
+
   return (
     <div className="product-card">
       <div className="product-image">
@@ -47,7 +59,12 @@ export default function Card({
           loading="lazy"
           alt="Product image"
         />
-        <button className="add-to-cart-btn">Add to Cart</button>
+        <button
+          onClick={() => handleAddToCart(title)}
+          className="add-to-cart-btn"
+        >
+          Add to Cart
+        </button>
       </div>
       <div className="product-info">
         <div className="product-title">{title}</div>
