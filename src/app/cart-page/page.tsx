@@ -22,7 +22,9 @@ export default function CartPage() {
     return cartProductNames?.includes(product.productName);
   });
 
-  console.log(cartProducts);
+  if (cartProducts?.length === 0) {
+    return <div>Cart is empty</div>;
+  }
 
   return (
     <div className="product-grid">
