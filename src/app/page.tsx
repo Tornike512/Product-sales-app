@@ -13,6 +13,7 @@ import Card from "@/components/Card/Card";
 import HomePage from "@/components/Home/HomePage";
 
 import "./global.css";
+import CartPopUp from "@/components/CartPopUp/CartPopUp";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -116,7 +117,7 @@ export default function Home() {
     <>
       <div className="header-sort">
         <h1>Products</h1>
-
+        <CartPopUp />
         <div className="custom-select-container">
           <select
             className="custom-select"
