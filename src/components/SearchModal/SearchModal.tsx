@@ -1,6 +1,7 @@
+import { useDispatch } from "react-redux";
 import { useGetAllProducts } from "@/hooks/useGetAllProducts";
 import { useState } from "react";
-import { AppState } from "@/store/store";
+import { AppState, SHOW_TOAST } from "@/store/store";
 import { useSelector } from "react-redux";
 import { Product } from "@/hooks/useGetAllProducts";
 
@@ -8,6 +9,7 @@ import "../SearchModal/SearchModal.css";
 import Image from "next/image";
 
 export default function SearchModal() {
+  const dispatch = useDispatch();
   const { products } = useGetAllProducts();
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const term = useSelector((state: AppState) => state.term);
@@ -54,6 +56,10 @@ export default function SearchModal() {
       })
     : [];
 
+  const handleAddToCartButton = () => {
+    dispatch({ type: SHOW_TOAST, payload: true });
+  };
+
   if (!searchProducts || searchProducts.length === 0) {
     return (
       <div className="search-modal-container">
@@ -95,7 +101,10 @@ export default function SearchModal() {
                 )}
                 {hoveredIndex === index && (
                   <div className="search-modal-product-overlay">
-                    <button className="search-modal-btn secondary-btn">
+                    <button
+                      onClick={handleAddToCartButton}
+                      className="search-modal-btn secondary-btn"
+                    >
                       Add to Cart
                     </button>
                   </div>

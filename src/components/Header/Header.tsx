@@ -27,10 +27,6 @@ export default function Header() {
     setIsInputFocused(true);
   };
 
-  const handleInputBlur = () => {
-    setIsInputFocused(false);
-  };
-
   const handleSearch = (term: string) => {
     dispatch({ type: SEARCH_KEY, payload: term });
     router.push("/products-page");
@@ -69,7 +65,6 @@ export default function Header() {
             value={searchTerm}
             onChange={handleInputChange}
             onFocus={handleInputFocus}
-            onBlur={handleInputBlur}
           />
           <button onClick={() => handleSearch(searchTerm)}>Search</button>
           <Cart />

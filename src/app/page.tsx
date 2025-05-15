@@ -29,8 +29,6 @@ export default function Home() {
     return state.showToast;
   });
 
-  console.log(showToast);
-
   const { productsByCategory, loading } = useGetProductsByCategory(
     storeSelectedCategory
   );
