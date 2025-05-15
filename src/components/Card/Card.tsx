@@ -1,5 +1,5 @@
-import { ADD_TO_CART } from "@/store/store";
-import { useDispatch } from "react-redux";
+import { ADD_TO_CART, AppState, SHOW_TOAST } from "@/store/store";
+import { useDispatch, useSelector } from "react-redux";
 
 import Image from "next/image";
 
@@ -25,6 +25,9 @@ export default function Card({
   storeName?: string;
 }) {
   const dispatch = useDispatch();
+  const showToast = useSelector((state: AppState) => {
+    return state.showToast;
+  });
 
   const renderImageByStore = (storeName: string | undefined) => {
     switch (storeName) {
@@ -47,7 +50,14 @@ export default function Card({
     console.log(productName);
 
     dispatch({ type: ADD_TO_CART, payload: productName });
+    dispatch({ type: SHOW_TOAST, payload: true });
   };
+
+  if (showToast) {
+    setTimeout(() => {
+      dispatch({ type: SHOW_TOAST, payload: false });
+    }, 1800);
+  }
 
   return (
     <div className="product-card">

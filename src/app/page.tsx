@@ -11,9 +11,9 @@ import { Product } from "@/hooks/useGetAllProducts";
 import ProductsSkeleton from "@/components/ProductsSkeleton/ProductsSkeleton";
 import Card from "@/components/Card/Card";
 import HomePage from "@/components/Home/HomePage";
+import CartPopUp from "@/components/CartPopUp/CartPopUp";
 
 import "./global.css";
-import CartPopUp from "@/components/CartPopUp/CartPopUp";
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +24,12 @@ export default function Home() {
   const storeSelectedCategory = useSelector(
     (state: AppState) => state.currentCategory
   );
+
+  const showToast = useSelector((state: AppState) => {
+    return state.showToast;
+  });
+
+  console.log(showToast);
 
   const { productsByCategory, loading } = useGetProductsByCategory(
     storeSelectedCategory
@@ -117,7 +123,7 @@ export default function Home() {
     <>
       <div className="header-sort">
         <h1>Products</h1>
-        <CartPopUp />
+        {showToast && <CartPopUp />}
         <div className="custom-select-container">
           <select
             className="custom-select"
