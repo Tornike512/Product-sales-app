@@ -14,11 +14,14 @@ export default function Cart() {
   };
 
   return (
-    <Image
-      onClick={handleCartNavigation}
-      className="cart"
-      src={cartIcon}
-      alt="Cart Icon"
-    />
+    <div className="cart-icon-container">
+      <Image
+        onClick={handleCartNavigation}
+        className="cart"
+        src={cartIcon}
+        alt="Cart Icon"
+      />
+      <div className="cart-counter">1</div>
+    </div>
   );
 }

@@ -1,6 +1,25 @@
+.cart-icon-container {
+  position: relative;
+}
+
 .cart {
   width: 50px;
   height: 50px;
   margin-left: 25px;
   cursor: pointer;
+}
+
+.cart-counter {
+  width: 20px;
+  height: 20px;
+  background-color: red;
+  border-radius: 100%;
+  position: absolute;
+  top: 3px;
+  right: -7px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
