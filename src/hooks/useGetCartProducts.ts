@@ -2,9 +2,15 @@ import { useState, useEffect } from "react";
 import { Product } from "./useGetAllProducts";
 
 import axios from "axios";
+import { useSelector } from "react-redux";
+import { AppState } from "@/store/store";
 
 export const useGetCartProducts = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>();
+
+  const cartCount = useSelector((state: AppState) => {
+    return state.updateCart;
+  });
 
   const getCartProducts = async () => {
     try {
@@ -17,7 +23,7 @@ export const useGetCartProducts = () => {
 
   useEffect(() => {
     getCartProducts();
-  }, []);
+  }, [cartCount]);
 
   return { cartProducts };
 };

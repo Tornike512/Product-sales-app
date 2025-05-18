@@ -43,11 +43,11 @@
     right: 20px;
     opacity: 1;
   }
-  80% {
+  60% {
     right: 20px;
     opacity: 1;
   }
-  100% {
+  90% {
     right: -290px;
     opacity: 0;
   }

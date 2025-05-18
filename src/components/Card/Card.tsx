@@ -1,4 +1,4 @@
-import { AppState, SHOW_TOAST } from "@/store/store";
+import { AppState, SHOW_TOAST, UPDATE_CART } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useAddCartProducts } from "@/hooks/useAddCartProduct";
 import { Product } from "@/hooks/useGetAllProducts";
@@ -32,6 +32,7 @@ export default function Card({
   const showToast = useSelector((state: AppState) => {
     return state.showToast;
   });
+
   const { addToCart } = useAddCartProducts();
 
   const renderImageByStore = (storeName: string | undefined) => {
@@ -63,6 +64,7 @@ export default function Card({
 
     await addToCart(productToAdd);
     dispatch({ type: SHOW_TOAST, payload: true });
+    dispatch({ type: UPDATE_CART });
   };
 
   if (showToast) {
