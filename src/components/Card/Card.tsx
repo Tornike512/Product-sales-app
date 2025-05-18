@@ -93,9 +93,11 @@ export default function Card({
           loading="lazy"
           alt="Product image"
         />
-        <button onClick={() => handleAddToCart()} className="add-to-cart-btn">
-          Add to Cart
-        </button>
+        {pathname !== "/cart-page" && (
+          <button onClick={() => handleAddToCart()} className="add-to-cart-btn">
+            Add to Cart
+          </button>
+        )}
         {pathname === "/cart-page" && (
           <Image
             className="trash-icon"

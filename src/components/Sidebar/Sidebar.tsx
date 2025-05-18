@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useGetAllCategories } from "@/hooks/useGetAllCategories";
+import SidebarSkeleton from "../SidebarSkeleton/SidebarSkeleton";
+
 import Link from "next/link";
 
 import "./Sidebar.css";
@@ -11,7 +13,7 @@ import "./Sidebar.css";
 export default function Sidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { categories } = useGetAllCategories();
+  const { categories, loading } = useGetAllCategories();
 
   const dispatch = useDispatch();
 
@@ -49,6 +51,12 @@ export default function Sidebar() {
       paramName: category.toLowerCase().replace(/ /g, "_"),
     };
   });
+
+  if (loading) {
+    return <SidebarSkeleton />;
+  }
+
+  console.log(loading);
 
   return (
     <aside className="sidebar">
