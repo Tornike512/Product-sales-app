@@ -6,18 +6,27 @@ import axios from "axios";
 export const useAddCartProducts = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const addToCart = async (product: Product) => {
-    setLoading(false);
+  const addToCart = async (product: any) => {
+    setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3001/api/cart/add", {
-        product: product,
+      const requestBody = {
+        productName: product?.productName,
+        newPrice: product?.price,
+        oldPrice: product?.oldPrice || 0,
+        imageUrl: product?.imageUrl || "",
+        store: product?.store || "",
+        category: product?.category || "",
         quantity: 1,
-      });
-      setLoading(true);
+      };
+
+      const response = await axios.post(
+        "http://localhost:3001/api/cart/add",
+        requestBody
+      );
 
       return response.data;
     } catch (error) {
-      console.error(error, "error adding a new product");
+      console.error("Error adding product to cart:", error);
     } finally {
       setLoading(false);
     }

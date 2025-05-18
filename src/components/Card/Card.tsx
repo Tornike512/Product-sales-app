@@ -51,8 +51,19 @@ export default function Card({
     }
   };
 
-  const handleAddToCart = async (productName: string) => {
-    await addToCart(product);
+  const handleAddToCart = async () => {
+    const productToAdd = {
+      ...product,
+      productName: title,
+      price: price,
+      oldPrice: oldPrice,
+      imageUrl: image,
+      store: storeName,
+    };
+
+    console.log("Product being added to cart:", productToAdd);
+
+    await addToCart(productToAdd);
     dispatch({ type: SHOW_TOAST, payload: true });
   };
 
@@ -72,10 +83,7 @@ export default function Card({
           loading="lazy"
           alt="Product image"
         />
-        <button
-          onClick={() => handleAddToCart(title)}
-          className="add-to-cart-btn"
-        >
+        <button onClick={() => handleAddToCart()} className="add-to-cart-btn">
           Add to Cart
         </button>
       </div>

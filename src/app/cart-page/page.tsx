@@ -1,38 +1,30 @@
 "use client";
 
-import { useSelector } from "react-redux";
-import { AppState } from "@/store/store";
-
-import "../cart-page/CartPage.css";
-import { Product, useGetAllProducts } from "@/hooks/useGetAllProducts";
 import Card from "@/components/Card/Card";
 
+import "../cart-page/CartPage.css";
+import { useGetCartProducts } from "@/hooks/useGetCartProducts";
+
 export default function CartPage() {
-  const { products } = useGetAllProducts();
+  const { cartProducts } = useGetCartProducts();
 
   const isNikoraStore = (storeName: string) => {
     return storeName && storeName.toLowerCase().includes("nikora");
   };
 
-  const cartProductNames = useSelector((state: AppState) => {
-    return state.addToCart;
-  });
-
-  const cartProducts = products?.filter((product) => {
-    return cartProductNames?.includes(product.productName);
-  });
-
   if (cartProducts?.length === 0) {
     return <div>Cart is empty</div>;
   }
 
+  console.log(cartProducts);
+
   return (
     <div className="product-grid">
-      {cartProducts?.map((product, index) => {
+      {cartProducts?.map((product: any, index: any) => {
         const rawNewPrice = Number(
-          typeof product.newPrice === "string"
-            ? product.newPrice.replace(",", ".")
-            : product.newPrice
+          typeof product.price === "string"
+            ? product.price.replace(",", ".")
+            : product.price
         );
 
         const rawOldPrice = Number(
@@ -55,6 +47,7 @@ export default function CartPage() {
             price={finalNewPrice.toFixed(2)}
             daysLeft={product.daysLeft}
             oldPrice={finalOldPrice.toFixed(2)}
+            product={product}
           />
         );
       })}
