@@ -11,6 +11,7 @@ import sparLogo from "../../../public/images/spar.png";
 import trashIcon from "../../../public/images/trash-icon.png";
 
 import "../Card/Card.css";
+import { useDeleteCartProducts } from "@/hooks/useDeleteCartProduct";
 
 export default function Card({
   image,
@@ -35,6 +36,7 @@ export default function Card({
   });
 
   const { addToCart } = useAddCartProducts();
+  const { deleteCartProduct, loading } = useDeleteCartProducts();
 
   const renderImageByStore = (storeName: string | undefined) => {
     switch (storeName) {
@@ -68,6 +70,11 @@ export default function Card({
     dispatch({ type: UPDATE_CART });
   };
 
+  const handleRemoveCartProduct = async (identifier: string) => {
+    deleteCartProduct(identifier);
+    console.log(identifier);
+  };
+
   if (showToast) {
     setTimeout(() => {
       dispatch({ type: SHOW_TOAST, payload: false });
@@ -93,6 +100,7 @@ export default function Card({
           width={100}
           height={100}
           alt="Trash icon"
+          onClick={() => handleRemoveCartProduct(title)}
         />
       </div>
       <div className="product-info">
