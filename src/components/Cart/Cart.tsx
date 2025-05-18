@@ -23,7 +23,9 @@ export default function Cart() {
         src={cartIcon}
         alt="Cart Icon"
       />
-      <div className="cart-counter">{cartProducts?.length}</div>
+      {cartProducts?.length !== 0 && (
+        <div className="cart-counter">{cartProducts?.length}</div>
+      )}{" "}
     </div>
   );
 }
