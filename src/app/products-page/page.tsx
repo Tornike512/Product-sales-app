@@ -53,6 +53,7 @@ export default function ProductsPage() {
               price={finalNewPrice.toFixed(2)}
               daysLeft={product.daysLeft}
               oldPrice={finalOldPrice.toFixed(2)}
+              product={product}
             />
           );
         })}

@@ -1,5 +1,7 @@
 import { ADD_TO_CART, AppState, SHOW_TOAST } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
+import { useAddCartProducts } from "@/hooks/useAddCartProduct";
+import { Product } from "@/hooks/useGetAllProducts";
 
 import Image from "next/image";
 
@@ -16,6 +18,7 @@ export default function Card({
   daysLeft,
   oldPrice,
   storeName,
+  product,
 }: {
   image: string;
   title: string;
@@ -23,11 +26,13 @@ export default function Card({
   oldPrice?: string;
   daysLeft?: string;
   storeName?: string;
+  product: Product;
 }) {
   const dispatch = useDispatch();
   const showToast = useSelector((state: AppState) => {
     return state.showToast;
   });
+  const { loading, addToCart } = useAddCartProducts();
 
   const renderImageByStore = (storeName: string | undefined) => {
     switch (storeName) {
@@ -46,10 +51,8 @@ export default function Card({
     }
   };
 
-  const handleAddToCart = (productName: string) => {
-    console.log(productName);
-
-    dispatch({ type: ADD_TO_CART, payload: productName });
+  const handleAddToCart = async (productName: string) => {
+    await addToCart(product);
     dispatch({ type: SHOW_TOAST, payload: true });
   };
 

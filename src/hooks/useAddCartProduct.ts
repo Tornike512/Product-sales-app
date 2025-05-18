@@ -3,10 +3,10 @@ import { Product } from "./useGetAllProducts";
 
 import axios from "axios";
 
-export const useAddCartProducts = (product: Product) => {
+export const useAddCartProducts = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const addToCart = async () => {
+  const addToCart = async (product: Product) => {
     setLoading(false);
     try {
       const response = await axios.post("http://localhost:3001/api/cart/add", {
