@@ -5,7 +5,7 @@ import { Product } from "./useGetAllProducts";
 import axios from "axios";
 
 export const useGetCartProducts = () => {
-  const [cartProducts, setCartProducts] = useState();
+  const [cartProducts, setCartProducts] = useState<any>();
 
   const getCartProducts = async () => {
     try {
