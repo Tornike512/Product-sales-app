@@ -26,17 +26,11 @@ interface TERM extends Action<typeof TERM> {
 interface SEARCH_KEY extends Action<typeof SEARCH_KEY> {
   payload: string;
 }
-
 interface SHOW_TOAST extends Action<typeof SHOW_TOAST> {
   payload: boolean;
 }
 
-export type AppAction =
-  | IncrementAction
-  | SORT
-  | TERM
-  | SEARCH_KEY
-\  | SHOW_TOAST;
+export type AppAction = IncrementAction | SORT | TERM | SEARCH_KEY | SHOW_TOAST;
 
 const initialState: AppState = {
   currentCategory: "",
