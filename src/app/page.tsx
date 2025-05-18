@@ -203,6 +203,7 @@ export default function Home() {
               price={finalNewPrice.toFixed(2)}
               daysLeft={product.daysLeft}
               oldPrice={finalOldPrice.toFixed(2)}
+              product={product}
             />
           );
         })}

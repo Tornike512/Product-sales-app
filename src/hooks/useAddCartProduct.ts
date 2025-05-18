@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Product } from "./useGetAllProducts";
 
 import axios from "axios";
 

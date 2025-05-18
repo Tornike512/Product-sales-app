@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { Product } from "./useGetAllProducts";
-
 import axios from "axios";
 
 export const useGetCartProducts = () => {
