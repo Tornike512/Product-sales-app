@@ -29,7 +29,7 @@
   justify-content: center;
 }
 
-.product-image img {
+.product-image img:first-child {
   color: transparent;
   width: auto;
   height: 213px;
@@ -105,4 +105,14 @@
 
 .add-to-cart-btn:hover {
   background-color: #e9e9e9;
+}
+
+.trash-icon {
+  color: transparent;
+  width: 40px;
+  height: 47px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }

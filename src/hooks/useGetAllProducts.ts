@@ -7,7 +7,7 @@ export interface Product {
   imageUrl: string;
   daysLeft: string;
   newPrice: string;
-  oldPrice: string;
+  oldPrice?: string | number;
   category: string;
   discountPercentage: string;
   store: string;

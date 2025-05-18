@@ -8,6 +8,7 @@ import Image from "next/image";
 import nikoraLogo from "../../../public/images/nikora.png";
 import oriNabijiLogo from "../../../public/images/oriNabiji.png";
 import sparLogo from "../../../public/images/spar.png";
+import trashIcon from "../../../public/images/trash-icon.png";
 
 import "../Card/Card.css";
 
@@ -23,7 +24,7 @@ export default function Card({
   image: string;
   title: string;
   price: string;
-  oldPrice?: string;
+  oldPrice?: string | number;
   daysLeft?: string;
   storeName?: string;
   product: Product;
@@ -86,6 +87,13 @@ export default function Card({
         <button onClick={() => handleAddToCart()} className="add-to-cart-btn">
           Add to Cart
         </button>
+        <Image
+          className="trash-icon"
+          src={trashIcon}
+          width={100}
+          height={100}
+          alt="Trash icon"
+        />
       </div>
       <div className="product-info">
         <div className="product-title">{title}</div>
@@ -93,11 +101,12 @@ export default function Card({
           <span> {price}₾</span>
           {oldPrice !== "NaN" &&
             oldPrice !== undefined &&
+            oldPrice !== 0 &&
             oldPrice !== null &&
             oldPrice !== "" &&
             oldPrice !== "0.00" && (
               <span className="old-price">{oldPrice}₾</span>
-            )}{" "}
+            )}
         </div>
         <span className="days-left">
           {daysLeft ? `დარჩა ${daysLeft} დღე` : ""}
