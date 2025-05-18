@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { Product } from "./useGetAllProducts";
 
 import axios from "axios";
 
 export const useAddCartProducts = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const addToCart = async (product: any) => {
+  const addToCart = async (product: Product) => {
     setLoading(true);
     try {
       const requestBody = {

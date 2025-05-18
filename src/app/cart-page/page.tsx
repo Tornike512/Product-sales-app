@@ -1,9 +1,9 @@
 "use client";
 
 import Card from "@/components/Card/Card";
-
 import "../cart-page/CartPage.css";
 import { useGetCartProducts } from "@/hooks/useGetCartProducts";
+import { Product } from "@/hooks/useGetAllProducts";
 
 export default function CartPage() {
   const { cartProducts } = useGetCartProducts();
@@ -14,7 +14,7 @@ export default function CartPage() {
 
   return (
     <div className="product-grid">
-      {cartProducts?.map((product: any, index: any) => {
+      {cartProducts?.map((product: Product, index: number) => {
         return (
           <Card
             key={index}

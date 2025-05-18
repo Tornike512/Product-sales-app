@@ -11,6 +11,7 @@ export interface Product {
   category: string;
   discountPercentage: string;
   store: string;
+  price: string;
 }
 
 type StoreData = Product[];

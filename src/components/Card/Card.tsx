@@ -56,12 +56,10 @@ export default function Card({
       ...product,
       productName: title,
       price: price,
-      oldPrice: oldPrice,
+      oldPrice: oldPrice ?? "",
       imageUrl: image,
-      store: storeName,
+      store: storeName ?? "",
     };
-
-    console.log("Product being added to cart:", productToAdd);
 
     await addToCart(productToAdd);
     dispatch({ type: SHOW_TOAST, payload: true });

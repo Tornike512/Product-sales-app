@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { Product } from "./useGetAllProducts";
 
 import axios from "axios";
 
 export const useGetCartProducts = () => {
-  const [cartProducts, setCartProducts] = useState<any>();
+  const [cartProducts, setCartProducts] = useState<Product[]>();
 
   const getCartProducts = async () => {
     try {
