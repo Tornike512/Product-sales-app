@@ -2,6 +2,8 @@ import { AppState, SHOW_TOAST, UPDATE_CART } from "@/store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useAddCartProducts } from "@/hooks/useAddCartProduct";
 import { Product } from "@/hooks/useGetAllProducts";
+import { useDeleteCartProducts } from "@/hooks/useDeleteCartProduct";
+import { usePathname } from "next/navigation";
 
 import Image from "next/image";
 
@@ -11,7 +13,6 @@ import sparLogo from "../../../public/images/spar.png";
 import trashIcon from "../../../public/images/trash-icon.png";
 
 import "../Card/Card.css";
-import { useDeleteCartProducts } from "@/hooks/useDeleteCartProduct";
 
 export default function Card({
   image,
@@ -34,6 +35,7 @@ export default function Card({
   const showToast = useSelector((state: AppState) => {
     return state.showToast;
   });
+  const pathname = usePathname();
 
   const { addToCart } = useAddCartProducts();
   const { deleteCartProduct, loading } = useDeleteCartProducts();
@@ -72,13 +74,13 @@ export default function Card({
 
   const handleRemoveCartProduct = async (identifier: string) => {
     deleteCartProduct(identifier);
-    console.log(identifier);
+    dispatch({ type: UPDATE_CART });
   };
 
   if (showToast) {
     setTimeout(() => {
       dispatch({ type: SHOW_TOAST, payload: false });
-    }, 1800);
+    }, 2100);
   }
 
   return (
@@ -94,14 +96,16 @@ export default function Card({
         <button onClick={() => handleAddToCart()} className="add-to-cart-btn">
           Add to Cart
         </button>
-        <Image
-          className="trash-icon"
-          src={trashIcon}
-          width={100}
-          height={100}
-          alt="Trash icon"
-          onClick={() => handleRemoveCartProduct(title)}
-        />
+        {pathname === "/cart-page" && (
+          <Image
+            className="trash-icon"
+            src={trashIcon}
+            width={100}
+            height={100}
+            alt="Trash icon"
+            onClick={() => handleRemoveCartProduct(title)}
+          />
+        )}
       </div>
       <div className="product-info">
         <div className="product-title">{title}</div>
