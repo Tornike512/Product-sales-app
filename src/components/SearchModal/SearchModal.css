@@ -72,6 +72,12 @@
   display: flex;
   justify-content: space-between;
   gap: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.search-modal-product:hover .search-modal-product-overlay {
+  opacity: 1;
 }
 
 .search-modal-btn {
