@@ -25,7 +25,9 @@ export function useGetAllProducts() {
     setLoadingAll(true);
     setError(null);
     try {
-      const response = await axios.get(`http://localhost:3001/api/promotions`);
+      const response = await axios.get(
+        `https://product-sales-backend-3.onrender.com/api/promotions`
+      );
 
       if (response.data && response.data.promotions) {
         setProducts(response.data.promotions);

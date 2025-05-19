@@ -8,7 +8,9 @@ export const useGetAllCategories = () => {
     const fetchCategories = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:3001/api/categories");
+        const response = await fetch(
+          "https://product-sales-backend-3.onrender.com/api/categories"
+        );
         const data = await response.json();
         setCategories(data.categories);
       } catch (error) {
