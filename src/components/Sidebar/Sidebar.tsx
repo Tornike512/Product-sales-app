@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { useGetAllCategories } from "@/hooks/useGetAllCategories";
+
 import SidebarSkeleton from "../SidebarSkeleton/SidebarSkeleton";
+import CartCalculator from "../CartCalculator/CartCalculator";
 
 import Link from "next/link";
 
@@ -14,6 +16,7 @@ export default function Sidebar() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { categories, loading } = useGetAllCategories();
+  const pathname = usePathname();
 
   const dispatch = useDispatch();
 
@@ -54,6 +57,10 @@ export default function Sidebar() {
 
   if (loading) {
     return <SidebarSkeleton />;
+  }
+
+  if (pathname === "/cart-page") {
+    return <CartCalculator />;
   }
 
   return (

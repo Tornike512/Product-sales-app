@@ -13,6 +13,7 @@ const nextConfig = {
       "fifth.media.2nabiji.ge",
       "six.media.2nabiji.ge",
       "static.spargeorgia.com",
+      "glovo.dhmedia.io",
     ],
   },
 };
