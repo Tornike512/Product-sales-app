@@ -1,7 +1,9 @@
-import Header from "@/components/Header/Header";
-import Sidebar from "@/components/Sidebar/Sidebar";
 import { ReduxProvider } from "@/components/Providers/Providers";
 import { Suspense } from "react";
+
+import Header from "@/components/Header/Header";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import PreLoadLogo from "@/components/PreLoadLogo/PreLoadLogo";
 
 import "./global.css";
 
@@ -20,6 +22,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ReduxProvider>
+          <PreLoadLogo />
           <Header />
           <main>
             <Suspense fallback={<div>Loading sidebar...</div>}>
@@ -27,7 +30,6 @@ export default function RootLayout({
             </Suspense>
             <section className="product-container">{children}</section>
           </main>
-
           <footer>
             <p>&copy; 2025 SaleStores. All rights reserved.</p>
           </footer>
