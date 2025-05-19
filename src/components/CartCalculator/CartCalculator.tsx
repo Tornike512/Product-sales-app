@@ -40,8 +40,8 @@ export default function ItemPriceCalculator() {
               <li key={index} className="item">
                 <span className="item-name">{product.productName}</span>
                 <span className="item-price">
-                  <span>{product.price} ₾</span>
-                  <span>{product.oldPrice} ₾</span>
+                  <span>{Number(product.price).toFixed(2)} ₾</span>
+                  <span>{Number(product.oldPrice).toFixed(2)} ₾</span>
                 </span>
               </li>
             );
@@ -53,8 +53,8 @@ export default function ItemPriceCalculator() {
         <div className="total-row">
           <span className="total-label">Total Saved:</span>
           <span className="total-value">
-            <span>{totalSum} ₾</span>
-            <span>{totalOldPriceSum} ₾</span>
+            <span>{Number(totalSum).toFixed(2)} ₾</span>
+            <span>{Number(totalOldPriceSum).toFixed(2)} ₾</span>
           </span>
         </div>
       </div>
