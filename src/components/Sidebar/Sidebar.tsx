@@ -56,8 +56,6 @@ export default function Sidebar() {
     return <SidebarSkeleton />;
   }
 
-  console.log(loading);
-
   return (
     <aside className="sidebar">
       <h2>Categories</h2>

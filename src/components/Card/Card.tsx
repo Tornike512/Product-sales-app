@@ -38,7 +38,7 @@ export default function Card({
   const pathname = usePathname();
 
   const { addToCart } = useAddCartProducts();
-  const { deleteCartProduct, loading } = useDeleteCartProducts();
+  const { deleteCartProduct } = useDeleteCartProducts();
 
   const renderImageByStore = (storeName: string | undefined) => {
     switch (storeName) {
