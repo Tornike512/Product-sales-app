@@ -34,7 +34,11 @@ export default function SearchModalProduct() {
     return storeName && storeName.toLowerCase().includes("nikora");
   };
 
-  const formatPrice = (price: string, storeName: string) => {
+  const formatPrice = (
+    price: string | number | undefined,
+    storeName: string
+  ) => {
+    if (price === undefined) return "0.00";
     const numericPrice = Number(
       typeof price === "string" ? price.replace(",", ".") : price
     );

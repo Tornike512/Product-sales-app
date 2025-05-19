@@ -17,8 +17,6 @@ export default function CartPage() {
     <ProductsSkeleton />;
   }
 
-  console.log(loading);
-
   return (
     <div className="product-grid">
       {cartProducts?.map((product: Product, index: number) => {
