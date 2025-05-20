@@ -10,6 +10,7 @@ import Image from "next/image";
 import nikoraLogo from "../../../public/images/nikora.png";
 import oriNabijiLogo from "../../../public/images/oriNabiji.png";
 import sparLogo from "../../../public/images/spar.png";
+import euroProductIcon from "../../../public/images/europroduct.png";
 import trashIcon from "../../../public/images/trash-icon.png";
 
 import "../Card/Card.css";
@@ -50,8 +51,8 @@ export default function Card({
         return oriNabijiLogo;
       case "Spar":
         return sparLogo;
-      case "smart":
-        return "/smart.png";
+      case "Europroduct":
+        return euroProductIcon;
       default:
         return "/placeholder.jpg";
     }
