@@ -11,7 +11,7 @@ export const useDeleteCartProducts = () => {
       const encodedProductIdentifier = encodeURIComponent(productIdentifier);
 
       const response = await axios.delete(
-        `https://product-sales-backend-3.onrender.com/api/cart/item/${encodedProductIdentifier}`
+        `http://localhost:3001/api/cart/item/${encodedProductIdentifier}`
       );
 
       return response.data;

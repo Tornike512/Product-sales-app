@@ -45,15 +45,17 @@ export default function Sidebar() {
     setSelectedCategory(categoryParam);
   };
 
-  const formattedCategories = categories.map((category) => {
-    return {
-      displayName: category
-        .toLowerCase()
-        .replace(/_/g, " ")
-        .replace(/^[a-z]/, (match) => match.toUpperCase()),
-      paramName: category.toLowerCase().replace(/ /g, "_"),
-    };
-  });
+  const formattedCategories = categories
+    .map((category) => {
+      return {
+        displayName: category
+          .toLowerCase()
+          .replace(/_/g, " ")
+          .replace(/^[a-z]/, (match) => match.toUpperCase()),
+        paramName: category.toLowerCase().replace(/ /g, "_"),
+      };
+    })
+    .sort((a, b) => a.displayName.localeCompare(b.displayName));
 
   if (loading) {
     return <SidebarSkeleton />;

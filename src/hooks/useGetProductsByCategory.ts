@@ -14,7 +14,7 @@ export function useGetProductsByCategory(category: string | null) {
       setLoading(true);
       try {
         const response = await fetch(
-          `https://product-sales-backend-3.onrender.com/api/promotions/${category}`
+          `http://localhost:3001/api/promotions/${category}`
         );
 
         if (!response.ok) {

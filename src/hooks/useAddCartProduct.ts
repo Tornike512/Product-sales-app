@@ -20,7 +20,7 @@ export const useAddCartProducts = () => {
       };
 
       const response = await axios.post(
-        "https://product-sales-backend-3.onrender.com/api/cart/add",
+        "http://localhost:3001/api/cart/add",
         requestBody
       );
 

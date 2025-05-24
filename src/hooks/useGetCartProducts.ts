@@ -16,9 +16,7 @@ export const useGetCartProducts = () => {
   const getCartProducts = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(
-        "https://product-sales-backend-3.onrender.com/api/cart"
-      );
+      const response = await axios.get("http://localhost:3001/api/cart");
       setCartProducts(response.data.cart);
     } catch (error) {
       console.error(error, "Error fetching cart products");
