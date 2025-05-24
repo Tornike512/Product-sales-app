@@ -100,9 +100,9 @@ export default function SearchModalProduct() {
               <div className="search-modal-product-price">
                 {product.oldPrice &&
                   Number(formattedOldPrice) > Number(formattedNewPrice) && (
-                    <span className="new-price">${formattedNewPrice}</span>
+                    <span className="new-price">{formattedNewPrice}₾</span>
                   )}
-                <span className="old-price">${formattedOldPrice}</span>
+                <span className="old-price">{formattedOldPrice}₾</span>
               </div>
             </div>
           </div>
