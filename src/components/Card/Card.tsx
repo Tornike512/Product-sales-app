@@ -78,11 +78,11 @@ export default function Card({
     dispatch({ type: UPDATE_CART });
   };
 
-  if (showToast) {
-    setTimeout(() => {
-      dispatch({ type: SHOW_TOAST, payload: false });
-    }, 2100);
-  }
+  // if (showToast) {
+  //   setTimeout(() => {
+  //     dispatch({ type: SHOW_TOAST, payload: false });
+  //   }, 2100);
+  // }
 
   return (
     <div className="product-card">

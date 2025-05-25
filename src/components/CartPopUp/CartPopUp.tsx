@@ -11,11 +11,19 @@ export default function CartPopUp() {
   };
 
   return (
-    <>
+    <div className="toast-container">
       <div id="toast">
         <p>Product added successfully</p>
         <button onClick={handleCloseToastButton}>×</button>
       </div>
-    </>
+      <div id="toast">
+        <p>Product added successfully</p>
+        <button onClick={handleCloseToastButton}>×</button>
+      </div>
+      <div id="toast">
+        <p>Product added successfully</p>
+        <button onClick={handleCloseToastButton}>×</button>
+      </div>
+    </div>
   );
 }

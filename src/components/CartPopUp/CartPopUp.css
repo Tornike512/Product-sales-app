@@ -1,7 +1,13 @@
+.toast-container {
+  background-color: blue;
+  width: 300px;
+  height: 100%;
+  position: absolute;
+  right: 0;
+  z-index: 20;
+}
+
 #toast {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
   background-color: #333;
   color: white;
   padding: 15px 25px;
@@ -34,7 +40,7 @@
   color: #ddd;
 }
 
-@keyframes toastAnimation {
+/* @keyframes toastAnimation {
   0% {
     right: -290px;
     opacity: 0;
@@ -51,4 +57,4 @@
     right: -290px;
     opacity: 0;
   }
-}
+} */
