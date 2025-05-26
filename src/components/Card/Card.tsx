@@ -1,5 +1,5 @@
-import { AppState, TOASTS, UPDATE_CART } from "@/store/store";
-import { useDispatch, useSelector } from "react-redux";
+import { TOASTS, UPDATE_CART } from "@/store/store";
+import { useDispatch } from "react-redux";
 import { useAddCartProducts } from "@/hooks/useAddCartProduct";
 import { Product } from "@/hooks/useGetAllProducts";
 import { useDeleteCartProducts } from "@/hooks/useDeleteCartProduct";
@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 
 import Image from "next/image";
 
+import Loader from "../Loader/Loader";
 import nikoraLogo from "../../../public/images/nikora.png";
 import oriNabijiLogo from "../../../public/images/oriNabiji.png";
 import sparLogo from "../../../public/images/spar.png";
@@ -33,13 +34,11 @@ export default function Card({
   product: Product;
 }) {
   const dispatch = useDispatch();
-  const showToast = useSelector((state: AppState) => {
-    return state.toasts;
-  });
+
   const pathname = usePathname();
 
   const { addToCart } = useAddCartProducts();
-  const { deleteCartProduct } = useDeleteCartProducts();
+  const { deleteCartProduct, loading } = useDeleteCartProducts();
 
   const renderImageByStore = (storeName: string | undefined) => {
     switch (storeName) {
@@ -78,11 +77,9 @@ export default function Card({
     dispatch({ type: UPDATE_CART });
   };
 
-  // if (showToast) {
-  //   setTimeout(() => {
-  //     dispatch({ type: TOASTS, payload: false });
-  //   }, 2100);
-  // }
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="product-card">

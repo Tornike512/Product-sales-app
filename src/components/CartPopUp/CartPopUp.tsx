@@ -14,7 +14,6 @@ export default function CartPopUp() {
   const handleCloseToastButton = () => {
     dispatch({ type: TOASTS, payload: true });
   };
-  console.log(toasts);
 
   return (
     <div className="toast-container">

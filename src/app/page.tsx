@@ -12,6 +12,7 @@ import ProductsSkeleton from "@/components/ProductsSkeleton/ProductsSkeleton";
 import Card from "@/components/Card/Card";
 import HomePage from "@/components/Home/HomePage";
 import CartPopUp from "@/components/CartPopUp/CartPopUp";
+import Loader from "@/components/Loader/Loader";
 
 import productNotFoundIcon from "../../public/images/product-not-found-icon.png";
 
@@ -171,11 +172,7 @@ export default function Home() {
         </div>
       </div>
       <div className="product-grid relative">
-        {isLoading && (
-          <div className="loading-overlay">
-            <div className="loader"></div>
-          </div>
-        )}
+        {isLoading && <Loader />}
         {sortedProducts?.length === 0 ? (
           <Image
             className="product-not-found"
