@@ -1,12 +1,13 @@
 .toast-container {
   width: 300px;
-  height: 165vh;
+  height: -webkit-fill-available;
   position: fixed;
   align-items: flex-start;
   flex-direction: column;
   justify-content: end;
   display: flex;
   right: 0;
+  top: 100%;
   z-index: 20;
 }
 
@@ -24,7 +25,7 @@
   max-width: 350px;
   animation: toastAnimation forwards 2s ease-in-out;
   margin-bottom: 10px;
-  margin-left: 300px;
+  margin-left: 320px;
   white-space: nowrap;
 }
 
@@ -48,19 +49,19 @@
 
 @keyframes toastAnimation {
   0% {
-    margin-right: -300px;
+    margin-right: -320px;
     opacity: 0;
   }
   20% {
-    margin-left: -20px;
+    margin-left: 0;
     opacity: 1;
   }
   60% {
-    margin-left: -20px;
+    margin-left: 0;
     opacity: 1;
   }
   90% {
-    margin-right: -300px;
+    margin-right: -320px;
     opacity: 0;
   }
 }
