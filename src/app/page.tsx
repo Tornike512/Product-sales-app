@@ -29,10 +29,6 @@ export default function Home() {
     (state: AppState) => state.currentCategory
   );
 
-  const showToast = useSelector((state: AppState) => {
-    return state.showToast;
-  });
-
   const { productsByCategory, loading } = useGetProductsByCategory(
     storeSelectedCategory
   );
@@ -125,7 +121,7 @@ export default function Home() {
     <>
       <div className="header-sort">
         <h1>Products</h1>
-        {showToast && <CartPopUp />}
+        <CartPopUp />
         <div className="custom-select-container">
           <select
             className="custom-select"

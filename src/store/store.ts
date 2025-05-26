@@ -1,11 +1,18 @@
 import { createStore, Action } from "redux";
+import { nanoid } from "nanoid";
+
+export interface IToast {
+  id: string;
+  title: string;
+  show: boolean;
+}
 
 export interface AppState {
   currentCategory: string;
   sort: string;
   term: string;
   searchKey: string;
-  showToast: boolean;
+  toasts: IToast[];
   updateCart: number;
 }
 
@@ -13,7 +20,7 @@ export const CATEGORY = "CATEGORY";
 export const SORT = "SORT";
 export const TERM = "TERM";
 export const SEARCH_KEY = "SEARCH_KEY";
-export const SHOW_TOAST = "SHOW_TOAST";
+export const TOASTS = "TOASTS";
 export const UPDATE_CART = "UPDATE_CART";
 
 interface IncrementAction extends Action<typeof CATEGORY> {
@@ -28,7 +35,7 @@ interface TERM extends Action<typeof TERM> {
 interface SEARCH_KEY extends Action<typeof SEARCH_KEY> {
   payload: string;
 }
-interface SHOW_TOAST extends Action<typeof SHOW_TOAST> {
+interface TOASTS extends Action<typeof TOASTS> {
   payload: boolean;
 }
 interface UPDATE_CART extends Action<typeof UPDATE_CART> {
@@ -40,7 +47,7 @@ export type AppAction =
   | SORT
   | TERM
   | SEARCH_KEY
-  | SHOW_TOAST
+  | TOASTS
   | UPDATE_CART;
 
 const initialState: AppState = {
@@ -48,7 +55,7 @@ const initialState: AppState = {
   sort: "discount-percentage-desc",
   term: "",
   searchKey: "",
-  showToast: false,
+  toasts: [],
   updateCart: 0,
 };
 
@@ -62,8 +69,14 @@ function reducer(state = initialState, action: AppAction): AppState {
       return { ...state, term: action.payload };
     case SEARCH_KEY:
       return { ...state, searchKey: action.payload };
-    case SHOW_TOAST:
-      return { ...state, showToast: action.payload };
+    case TOASTS:
+      return {
+        ...state,
+        toasts: [
+          ...state.toasts,
+          { id: nanoid(), title: "Product added successfully", show: true },
+        ],
+      };
     case UPDATE_CART:
       return { ...state, updateCart: state.updateCart + 1 };
     default:

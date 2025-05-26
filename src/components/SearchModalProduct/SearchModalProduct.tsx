@@ -1,6 +1,6 @@
 import { Product, useGetAllProducts } from "@/hooks/useGetAllProducts";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState, SHOW_TOAST } from "@/store/store";
+import { AppState, TOASTS } from "@/store/store";
 
 import Image from "next/image";
 
@@ -50,7 +50,7 @@ export default function SearchModalProduct() {
   };
 
   const handleAddToCartButton = () => {
-    dispatch({ type: SHOW_TOAST, payload: true });
+    dispatch({ type: TOASTS, payload: true });
   };
 
   const searchProducts = products
