@@ -6,7 +6,6 @@
   left: 0;
   top: 0;
   z-index: 15;
-  animation: hidePreload 3s ease-in-out;
 }
 
 .preload-logo {
@@ -16,19 +15,4 @@
   left: 50% !important;
   top: 50% !important;
   transform: translate(-50%, -50%) !important;
-}
-
-@keyframes hidePreload {
-  0% {
-    top: 0;
-  }
-  45% {
-    top: 0;
-  }
-  60% {
-    top: -100%;
-  }
-  100% {
-    top: -100%;
-  }
 }
