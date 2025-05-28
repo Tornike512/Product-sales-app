@@ -1,4 +1,5 @@
 import { Product, useGetAllProducts } from "@/hooks/useGetAllProducts";
+import { useAddCartProducts } from "@/hooks/useAddCartProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, TOASTS } from "@/store/store";
 
@@ -8,6 +9,7 @@ export default function SearchModalProduct() {
   const dispatch = useDispatch();
   const term = useSelector((state: AppState) => state.term);
   const { products } = useGetAllProducts();
+  const { addToCart } = useAddCartProducts();
 
   const getDiscountPercentage = (product: Product) => {
     if (product.discountPercentage !== undefined) {
@@ -49,7 +51,9 @@ export default function SearchModalProduct() {
     return finalPrice.toFixed(2);
   };
 
-  const handleAddToCartButton = () => {
+  const handleAddToCartButton = async (productToAdd: Product) => {
+    await addToCart(productToAdd);
+
     dispatch({ type: TOASTS, payload: true });
   };
 
@@ -76,6 +80,15 @@ export default function SearchModalProduct() {
         const formattedOldPrice = formatPrice(product.oldPrice, product.store);
         const discountPercentage = getDiscountPercentage(product);
 
+        const productToAdd = {
+          ...product,
+          productName: product.productName,
+          price: formattedNewPrice,
+          oldPrice: formattedOldPrice ?? "",
+          imageUrl: product.imageUrl,
+          store: product.store ?? "",
+        };
+
         return (
           <div key={index} className="search-modal-product">
             <div className="search-modal-product-image">
@@ -87,7 +100,7 @@ export default function SearchModalProduct() {
               )}
               <div className="search-modal-product-overlay">
                 <button
-                  onClick={handleAddToCartButton}
+                  onClick={() => handleAddToCartButton(productToAdd)}
                   className="search-modal-btn secondary-btn"
                 >
                   Add to Cart
