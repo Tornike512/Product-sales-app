@@ -9,9 +9,6 @@ export default function SearchModal() {
       <div className="search-modal-grid">
         <SearchModalProduct />
       </div>
-      <div className="search-modal-footer">
-        <button className="search-modal-view-all">View All Products</button>
-      </div>
     </div>
   );
 }

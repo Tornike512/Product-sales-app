@@ -195,3 +195,11 @@
   background-color: #4a154b;
   color: white;
 }
+
+.store-logo {
+  width: 30px !important;
+  height: 30px !important;
+  position: absolute !important;
+  top: 8px !important;
+  left: 8px !important;
+}

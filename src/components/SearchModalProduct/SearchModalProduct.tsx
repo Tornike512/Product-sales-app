@@ -1,7 +1,12 @@
 import { Product, useGetAllProducts } from "@/hooks/useGetAllProducts";
 import { useAddCartProducts } from "@/hooks/useAddCartProduct";
 import { useDispatch, useSelector } from "react-redux";
-import { AppState, TOASTS } from "@/store/store";
+import { AppState, TOASTS, UPDATE_CART } from "@/store/store";
+
+import nikoraLogo from "../../../public/images/nikora.png";
+import oriNabijiLogo from "../../../public/images/oriNabiji.png";
+import sparLogo from "../../../public/images/spar.png";
+import euroProductIcon from "../../../public/images/europroduct.png";
 
 import Image from "next/image";
 
@@ -51,18 +56,41 @@ export default function SearchModalProduct() {
     return finalPrice.toFixed(2);
   };
 
+  const renderImageByStore = (storeName: string | undefined) => {
+    console.log(storeName);
+
+    switch (storeName) {
+      case "nikora":
+        return nikoraLogo;
+      case "Nikora":
+        return nikoraLogo;
+      case "2nabiji":
+        return oriNabijiLogo;
+      case "Spar":
+        return sparLogo;
+      case "Europroduct":
+        return euroProductIcon;
+      case "europroduct":
+        return euroProductIcon;
+      default:
+        return "/placeholder.jpg";
+    }
+  };
+
   const handleAddToCartButton = async (productToAdd: Product) => {
     await addToCart(productToAdd);
 
     dispatch({ type: TOASTS, payload: true });
+    dispatch({ type: UPDATE_CART });
   };
 
   const searchProducts = products
-    ? products.filter((product: Product) => {
-        return product.productName.includes(term);
-      })
+    ? term && term.length > 0
+      ? products.filter((product: Product) => {
+          return product.productName.toLowerCase().includes(term.toLowerCase());
+        })
+      : products.slice(0, 10)
     : [];
-
   if (!searchProducts || searchProducts.length === 0) {
     return (
       <div className="search-modal-container">
@@ -85,7 +113,6 @@ export default function SearchModalProduct() {
           productName: product.productName,
           price: formattedNewPrice,
           oldPrice: formattedOldPrice ?? "",
-          imageUrl: product.imageUrl,
           store: product.store ?? "",
         };
 
@@ -106,10 +133,15 @@ export default function SearchModalProduct() {
                   Add to Cart
                 </button>
               </div>
+              <Image
+                fill
+                src={renderImageByStore(product.store)}
+                alt="Store logo"
+                className="store-logo"
+              />
             </div>
             <div className="search-modal-product-info">
               <h3>{product.productName}</h3>
-              <div className="search-modal-store">{product.store}</div>
               <div className="search-modal-product-price">
                 {product.oldPrice &&
                   Number(formattedOldPrice) > Number(formattedNewPrice) && (
