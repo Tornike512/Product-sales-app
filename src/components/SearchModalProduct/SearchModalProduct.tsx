@@ -113,7 +113,7 @@ export default function SearchModalProduct() {
           productName: product.productName,
           price: formattedNewPrice,
           oldPrice: formattedOldPrice ?? "",
-          store: product.store ?? "",
+          store: product.store ?? "nikora",
         };
 
         return (

@@ -52,6 +52,8 @@ export default function Card({
         return sparLogo;
       case "Europroduct":
         return euroProductIcon;
+      case "europroduct":
+        return euroProductIcon;
       default:
         return "/placeholder.jpg";
     }

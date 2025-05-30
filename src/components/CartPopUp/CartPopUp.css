@@ -4,7 +4,7 @@
   position: fixed;
   align-items: flex-start;
   flex-direction: column;
-  justify-content: end;
+  justify-content: flex-end;
   display: flex;
   right: 0;
   top: 100%;
