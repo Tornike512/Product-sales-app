@@ -2,6 +2,7 @@ import { Product, useGetAllProducts } from "@/hooks/useGetAllProducts";
 import { useAddCartProducts } from "@/hooks/useAddCartProduct";
 import { useDispatch, useSelector } from "react-redux";
 import { AppState, TOASTS, UPDATE_CART } from "@/store/store";
+import { useDebounce } from "@/hooks/useDebounce";
 
 import nikoraLogo from "../../../public/images/nikora.png";
 import oriNabijiLogo from "../../../public/images/oriNabiji.png";
@@ -13,6 +14,7 @@ import Image from "next/image";
 export default function SearchModalProduct() {
   const dispatch = useDispatch();
   const term = useSelector((state: AppState) => state.term);
+  const debouncedTerm = useDebounce(term, 500);
   const { products } = useGetAllProducts();
   const { addToCart } = useAddCartProducts();
 
@@ -57,11 +59,8 @@ export default function SearchModalProduct() {
   };
 
   const renderImageByStore = (storeName: string | undefined) => {
-    console.log(storeName);
-
     switch (storeName) {
       case "nikora":
-        return nikoraLogo;
       case "Nikora":
         return nikoraLogo;
       case "2nabiji":
@@ -69,7 +68,6 @@ export default function SearchModalProduct() {
       case "Spar":
         return sparLogo;
       case "Europroduct":
-        return euroProductIcon;
       case "europroduct":
         return euroProductIcon;
       default:
@@ -85,12 +83,15 @@ export default function SearchModalProduct() {
   };
 
   const searchProducts = products
-    ? term && term.length > 0
-      ? products.filter((product: Product) => {
-          return product.productName.toLowerCase().includes(term.toLowerCase());
-        })
+    ? debouncedTerm && debouncedTerm.length > 0
+      ? products.filter((product: Product) =>
+          product.productName
+            .toLowerCase()
+            .includes(debouncedTerm.toLowerCase())
+        )
       : products.slice(0, 10)
     : [];
+
   if (!searchProducts || searchProducts.length === 0) {
     return (
       <div className="search-modal-container">
@@ -103,7 +104,7 @@ export default function SearchModalProduct() {
 
   return (
     <>
-      {searchProducts?.map((product, index) => {
+      {searchProducts.map((product, index) => {
         const formattedNewPrice = formatPrice(product.newPrice, product.store);
         const formattedOldPrice = formatPrice(product.oldPrice, product.store);
         const discountPercentage = getDiscountPercentage(product);

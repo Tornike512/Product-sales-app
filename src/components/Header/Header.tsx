@@ -1,8 +1,9 @@
 "use client";
 import { useDispatch } from "react-redux";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SEARCH_KEY } from "@/store/store";
+import { useDebounce } from "@/hooks/useDebounce";
 
 import mainLogo from "../../../public/images/salesStores.png";
 import Image from "next/image";
@@ -17,6 +18,12 @@ export default function Header() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
+
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
+  useEffect(() => {
+    dispatch({ type: "TERM", payload: debouncedSearchTerm });
+  }, [debouncedSearchTerm, dispatch]);
 
   const handleHomeNavigation = () => {
     dispatch({ type: "CATEGORY", payload: "" });
@@ -33,9 +40,7 @@ export default function Header() {
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    dispatch({ type: "TERM", payload: value });
+    setSearchTerm(e.target.value);
   };
 
   return (
