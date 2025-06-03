@@ -65,6 +65,11 @@ export default function Sidebar() {
     return <CartCalculator />;
   }
 
+  const shouldShowHeader =
+    pathname !== "/register-page" && pathname !== "/sign-in-page";
+
+  if (!shouldShowHeader) return null;
+
   return (
     <aside className="sidebar">
       <h2>Categories</h2>

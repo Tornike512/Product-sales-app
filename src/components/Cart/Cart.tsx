@@ -25,7 +25,7 @@ export default function Cart() {
       />
       {cartProducts?.length !== 0 && (
         <div className="cart-counter">{cartProducts?.length}</div>
-      )}{" "}
+      )}
     </div>
   );
 }

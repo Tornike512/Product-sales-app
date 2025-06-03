@@ -1,7 +1,8 @@
 "use client";
+
 import { useDispatch } from "react-redux";
 import { ChangeEvent, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { SEARCH_KEY } from "@/store/store";
 import { useDebounce } from "@/hooks/useDebounce";
 
@@ -19,6 +20,7 @@ export default function Header() {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const router = useRouter();
+  const pathname = usePathname();
 
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
@@ -44,6 +46,11 @@ export default function Header() {
     setSearchTerm(e.target.value);
   };
 
+  const shouldShowHeader =
+    pathname !== "/register-page" && pathname !== "/sign-in-page";
+
+  if (!shouldShowHeader) return null;
+
   return (
     <>
       {isInputFocused && (
@@ -58,7 +65,7 @@ export default function Header() {
       <header>
         <Link
           rel="preload"
-          href={"/"}
+          href="/"
           onClick={handleHomeNavigation}
           className="logo"
         >
