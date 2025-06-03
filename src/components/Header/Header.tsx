@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import SearchModal from "../SearchModal/SearchModal";
 import Cart from "../Cart/Cart";
+import User from "../User/User";
 
 import "@/components/Header/Header.css";
 
@@ -73,6 +74,7 @@ export default function Header() {
           />
           <button onClick={() => handleSearch(searchTerm)}>Search</button>
           <Cart />
+          <User />
         </div>
       </header>
     </>

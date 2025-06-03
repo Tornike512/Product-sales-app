@@ -1,0 +1,46 @@
+.user-logo {
+  width: 40px;
+  height: auto;
+  margin-top: 3px;
+  margin-left: 10px;
+  cursor: pointer;
+  position: relative;
+}
+
+.register-signin {
+  position: absolute;
+  right: 0;
+  top: 49px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #495057;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.register {
+  width: 160px;
+  padding: 7px;
+  border-radius: 12px 12px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in {
+  padding: 7px;
+  width: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 0 12px 12px;
+}
+
+.register:hover,
+.sign-in:hover {
+  background-color: #e9ecef;
+}
