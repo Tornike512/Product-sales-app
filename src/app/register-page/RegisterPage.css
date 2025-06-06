@@ -1,0 +1,43 @@
+.register-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 50px auto 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.username,
+.email,
+.password,
+.re-password {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.username:focus,
+.email:focus,
+.password:focus,
+.re-password:focus {
+  border-color: #2f855a;
+  outline: none;
+}
+
+.register-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2f855a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background-color: #276749;
+}
