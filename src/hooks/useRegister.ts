@@ -8,17 +8,19 @@ interface IUserRegister {
   email: string;
 }
 
-export const useRegister = ({ username, password, email }: IUserRegister) => {
+export const useRegister = () => {
   const [loading, setLoading] = useState(false);
 
-  const credentials = { username, password, email };
-
-  const register = async () => {
+  const register = async ({ username, password, email }: IUserRegister) => {
+    const credentials = { username, password, email };
     setLoading(true);
     try {
-      const response = await axios.post("http://localhost:3000/register", {
-        credentials,
-      });
+      const response = await axios.post(
+        "http://localhost:3001/api/auth/register",
+        {
+          credentials,
+        }
+      );
       return response.data;
     } catch (error) {
       console.log(error, "Error registering");
