@@ -11,7 +11,7 @@ export default function Page() {
         type="password"
       />
       <input
-        placeholder="Re-Enter password"
+        placeholder="Re-enter password"
         className="re-password"
         type="password"
       />
