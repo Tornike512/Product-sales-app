@@ -9,7 +9,8 @@ interface IUserRegister {
 }
 
 export const useRegister = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const register = async ({ username, password, email }: IUserRegister) => {
     setLoading(true);
@@ -22,13 +23,15 @@ export const useRegister = () => {
           email,
         }
       );
+      setError(false);
       return response.data;
     } catch (error) {
       console.log(error, "Error registering");
+      setError(true);
     } finally {
       setLoading(false);
     }
   };
 
-  return { loading, register };
+  return { loading, register, error };
 };

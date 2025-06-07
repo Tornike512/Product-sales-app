@@ -20,6 +20,7 @@
   border-radius: 6px;
 }
 
+.email-error,
 .re-password-error {
   margin-bottom: 8px;
   border: 1px solid #ff0000;
@@ -47,7 +48,8 @@
   background-color: #276749;
 }
 
-.password-mismatch {
+.password-mismatch,
+.email-exists {
   font-size: 12px;
   display: flex;
   align-items: center;

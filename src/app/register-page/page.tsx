@@ -12,7 +12,7 @@ export default function Page() {
   const [RePassword, setRePassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<boolean>(false);
 
-  const { register, loading } = useRegister();
+  const { register, loading, error } = useRegister();
 
   const handleForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,9 +53,14 @@ export default function Page() {
         value={email}
         onChange={handleEmail}
         placeholder="Enter email"
-        className="email"
+        className={`email ${error && "email-error"}`}
         type="email"
       />
+      {error && (
+        <p className="email-exists">
+          An account with this email already exists
+        </p>
+      )}
       <input
         value={password}
         onChange={handlePassword}

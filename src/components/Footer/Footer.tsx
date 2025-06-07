@@ -6,7 +6,6 @@ import "./Footer.css";
 
 export default function Footer() {
   const pathname = usePathname();
-  console.log(pathname);
 
   if (pathname === "/register-page" || pathname === "/sign-in-page") {
     return null;
