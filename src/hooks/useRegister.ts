@@ -12,13 +12,14 @@ export const useRegister = () => {
   const [loading, setLoading] = useState(false);
 
   const register = async ({ username, password, email }: IUserRegister) => {
-    const credentials = { username, password, email };
     setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:3001/api/auth/register",
         {
-          credentials,
+          username,
+          password,
+          email,
         }
       );
       return response.data;
