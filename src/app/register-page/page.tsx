@@ -10,14 +10,16 @@ export default function Page() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [RePassword, setRePassword] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<boolean>(false);
 
   const { register, loading } = useRegister();
 
   const handleForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== RePassword) {
-      console.log("Passwords do not match");
-      return;
+      setPasswordError(true);
+    } else {
+      setPasswordError(false);
     }
     register({ email, username, password });
   };
@@ -65,9 +67,14 @@ export default function Page() {
         value={RePassword}
         onChange={handleRePassword}
         placeholder="Re-enter password"
-        className="re-password"
+        className={`re-password ${passwordError && "re-password-error"}`}
         type="password"
       />
+      {passwordError && (
+        <p className="password-mismatch">
+          Passwords do not match. Please try again
+        </p>
+      )}
       <button disabled={loading} className="register-button">
         {loading ? "Registering..." : "Register"}
       </button>
