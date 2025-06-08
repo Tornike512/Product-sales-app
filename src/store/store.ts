@@ -14,6 +14,7 @@ export interface AppState {
   searchKey: string;
   toasts: IToast[];
   updateCart: number;
+  authenticate: boolean;
 }
 
 export const CATEGORY = "CATEGORY";
@@ -22,6 +23,7 @@ export const TERM = "TERM";
 export const SEARCH_KEY = "SEARCH_KEY";
 export const TOASTS = "TOASTS";
 export const UPDATE_CART = "UPDATE_CART";
+export const AUTHENTICATE = "AUTHENTICATE";
 
 interface IncrementAction extends Action<typeof CATEGORY> {
   payload: string;
@@ -41,6 +43,9 @@ interface TOASTS extends Action<typeof TOASTS> {
 interface UPDATE_CART extends Action<typeof UPDATE_CART> {
   payload: number;
 }
+interface AUTHENTICATE extends Action<typeof AUTHENTICATE> {
+  payload: boolean;
+}
 
 export type AppAction =
   | IncrementAction
@@ -48,7 +53,8 @@ export type AppAction =
   | TERM
   | SEARCH_KEY
   | TOASTS
-  | UPDATE_CART;
+  | UPDATE_CART
+  | AUTHENTICATE;
 
 const initialState: AppState = {
   currentCategory: "",
@@ -57,6 +63,7 @@ const initialState: AppState = {
   searchKey: "",
   toasts: [],
   updateCart: 0,
+  authenticate: false,
 };
 
 function reducer(state = initialState, action: AppAction): AppState {
@@ -79,6 +86,8 @@ function reducer(state = initialState, action: AppAction): AppState {
       };
     case UPDATE_CART:
       return { ...state, updateCart: state.updateCart + 1 };
+    case AUTHENTICATE:
+      return { ...state, authenticate: action.payload };
     default:
       return state;
   }

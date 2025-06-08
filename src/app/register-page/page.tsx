@@ -1,9 +1,12 @@
 "use client";
 
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useRegister } from "@/hooks/useRegister";
+import { useRouter } from "next/navigation";
 
 import "./RegisterPage.css";
+import { AUTHENTICATE } from "@/store/store";
 
 export default function Page() {
   const [email, setEmail] = useState<string>("");
@@ -11,18 +14,32 @@ export default function Page() {
   const [password, setPassword] = useState<string>("");
   const [RePassword, setRePassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<boolean>(false);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
-  const { register, loading, error } = useRegister();
+  const { register, loading, error, success } = useRegister();
 
   const handleForm = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== RePassword) {
       setPasswordError(true);
-    } else {
-      setPasswordError(false);
+      return;
     }
-    register({ email, username, password });
+
+    register({
+      email: email.trim(),
+      username: username.trim(),
+      password,
+    });
   };
+
+  useEffect(() => {
+    if (success) {
+      const token = localStorage.getItem("token");
+      dispatch({ type: AUTHENTICATE, payload: !!token });
+      router.push("/");
+    }
+  }, [success]);
 
   const handleUsername = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
