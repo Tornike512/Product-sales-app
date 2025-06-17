@@ -9,6 +9,8 @@ export const useAddCartProducts = () => {
   const addToCart = async (product: Product) => {
     setLoading(true);
     try {
+      const token = localStorage.getItem("token");
+
       const requestBody = {
         productName: product?.productName,
         newPrice: product?.price,
@@ -21,7 +23,12 @@ export const useAddCartProducts = () => {
 
       const response = await axios.post(
         "http://localhost:3001/api/cart/add",
-        requestBody
+        requestBody,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       return response.data;

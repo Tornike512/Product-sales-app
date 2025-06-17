@@ -16,8 +16,6 @@ export default function Cart() {
   });
   const router = useRouter();
 
-  console.log(token);
-
   const handleCartNavigation = () => {
     if (token) {
       router.push("/cart-page");

@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Product } from "./useGetAllProducts";
-
-import axios from "axios";
 import { useSelector } from "react-redux";
 import { AppState } from "@/store/store";
+
+import axios from "axios";
 
 export const useGetCartProducts = () => {
   const [cartProducts, setCartProducts] = useState<Product[]>();
@@ -15,8 +15,14 @@ export const useGetCartProducts = () => {
 
   const getCartProducts = async () => {
     setLoading(true);
+
+    const token = localStorage.getItem("token") || "";
     try {
-      const response = await axios.get("http://localhost:3001/api/cart");
+      const response = await axios.get("http://localhost:3001/api/cart", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setCartProducts(response.data.cart);
     } catch (error) {
       console.error(error, "Error fetching cart products");

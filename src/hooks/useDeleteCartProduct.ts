@@ -7,11 +7,17 @@ export const useDeleteCartProducts = () => {
   const deleteCartProduct = async (productIdentifier: string) => {
     setLoading(true);
 
+    const token = localStorage.getItem("token");
     try {
       const encodedProductIdentifier = encodeURIComponent(productIdentifier);
 
       const response = await axios.delete(
-        `http://localhost:3001/api/cart/item/${encodedProductIdentifier}`
+        `http://localhost:3001/api/cart/item/${encodedProductIdentifier}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
       return response.data;

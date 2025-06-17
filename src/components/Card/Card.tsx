@@ -75,8 +75,12 @@ export default function Card({
   };
 
   const handleRemoveCartProduct = async (identifier: string) => {
-    deleteCartProduct(identifier);
-    dispatch({ type: UPDATE_CART });
+    try {
+      await deleteCartProduct(identifier);
+      dispatch({ type: UPDATE_CART });
+    } catch (error) {
+      console.error("Failed to delete cart product:", error);
+    }
   };
 
   if (loading) {
@@ -105,7 +109,7 @@ export default function Card({
             width={100}
             height={100}
             alt="Trash icon"
-            onClick={() => handleRemoveCartProduct(title)}
+            onClick={() => handleRemoveCartProduct(product.productIdentifier)} // ✅ correct
           />
         )}
       </div>

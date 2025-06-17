@@ -12,6 +12,7 @@ export interface Product {
   discountPercentage: string;
   store: string;
   price: string;
+  productIdentifier: string;
 }
 
 type StoreData = Product[];
