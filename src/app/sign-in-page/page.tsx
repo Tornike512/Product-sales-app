@@ -1,19 +1,69 @@
 "use client";
 
-import Link from "next/link";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useSignIn } from "@/hooks/useSignIn";
+import { useRouter } from "next/navigation";
+
 import "./SignInPage.css";
 
 export default function page() {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [wrongCredentials, setWrongCredentials] = useState<boolean>(false);
+
+  const { loading, signIn } = useSignIn();
+  const router = useRouter();
+
+  const token = localStorage.getItem("token");
+
+  const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePasswordInput = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+
+  const handleForm = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await signIn({ email, password });
+
+    if (token) {
+      router.push("/");
+    } else {
+      setWrongCredentials(true);
+    }
+  };
+
+  const handleRegisterNavigation = () => {
+    router.push("/register-page");
+  };
+
   return (
-    <form className="sign-in-container">
-      <input placeholder="Enter email" className="email-input" type="email" />
+    <form onSubmit={handleForm} className="sign-in-container">
       <input
+        value={email}
+        onChange={handleEmailInput}
+        placeholder="Enter email"
+        className={`email-input ${wrongCredentials ? "wrong-email" : ""}`}
+        type="email"
+      />
+      <input
+        value={password}
+        onChange={handlePasswordInput}
         placeholder="Enter password"
-        className="password-input"
+        className={`password-input ${wrongCredentials ? "wrong-password" : ""}`}
         type="password"
       />
-      <button className="sign-in-button">Sign in</button>
-      <span className="register-text">Register</span>
+      {wrongCredentials && (
+        <p className="wrong-credentials">Email or password is incorrect </p>
+      )}
+      <button className="sign-in-button">
+        {loading ? "Signing In..." : "Sign in"}
+      </button>
+      <span onClick={handleRegisterNavigation} className="register-text">
+        Register
+      </span>
     </form>
   );
 }

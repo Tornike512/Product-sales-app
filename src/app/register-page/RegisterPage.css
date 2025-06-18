@@ -57,3 +57,17 @@
   margin-bottom: 8px;
   color: #ff0000;
 }
+
+.sign-in-text {
+  margin-top: 16px;
+  display: flex;
+  color: #2f855a;
+  cursor: pointer;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-in-text:hover {
+  text-decoration: underline;
+}

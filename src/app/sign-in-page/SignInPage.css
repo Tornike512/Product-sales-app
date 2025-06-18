@@ -51,3 +51,18 @@
 .register-text:hover {
   text-decoration: underline;
 }
+
+.wrong-credentials {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  color: #ff0000;
+}
+
+.wrong-email,
+.wrong-password {
+  margin-bottom: 8px;
+  border: 1px solid #ff0000;
+}

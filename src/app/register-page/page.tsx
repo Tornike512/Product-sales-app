@@ -4,9 +4,9 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useRegister } from "@/hooks/useRegister";
 import { useRouter } from "next/navigation";
+import { AUTHENTICATE } from "@/store/store";
 
 import "./RegisterPage.css";
-import { AUTHENTICATE } from "@/store/store";
 
 export default function Page() {
   const [email, setEmail] = useState<string>("");
@@ -57,6 +57,10 @@ export default function Page() {
     setRePassword(e.target.value);
   };
 
+  const handleSignInPageNavigation = () => {
+    router.push("sign-in-page");
+  };
+
   return (
     <form onSubmit={handleForm} className="register-container">
       <input
@@ -100,6 +104,9 @@ export default function Page() {
       <button disabled={loading} className="register-button">
         {loading ? "Registering..." : "Register"}
       </button>
+      <span onClick={handleSignInPageNavigation} className="sign-in-text">
+        Sign in
+      </span>
     </form>
   );
 }

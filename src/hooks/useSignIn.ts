@@ -7,16 +7,19 @@ interface ISignInUser {
   password: string;
 }
 
-export const useSignIn = ({ email, password }: ISignInUser) => {
+export const useSignIn = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const signIn = async () => {
+  const signIn = async ({ email, password }: ISignInUser) => {
     setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:3001/api/auth/login",
         { email, password }
       );
+
+      const { token } = response.data;
+      localStorage.setItem("token", token);
 
       return response.data;
     } catch (error) {
