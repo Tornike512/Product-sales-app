@@ -1,0 +1,53 @@
+.sign-in-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 50px auto 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.email-input,
+.password-input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.email-input:focus,
+.password-input:focus {
+  border-color: #2f855a;
+  outline: none;
+}
+
+.sign-in-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2f855a;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.sign-in-button:hover {
+  background-color: #276749;
+}
+
+.register-text {
+  margin-top: 16px;
+  display: flex;
+  color: #2f855a;
+  cursor: pointer;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-text:hover {
+  text-decoration: underline;
+}

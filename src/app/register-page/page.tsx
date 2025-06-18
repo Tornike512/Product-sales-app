@@ -19,14 +19,14 @@ export default function Page() {
 
   const { register, loading, error, success } = useRegister();
 
-  const handleForm = (e: FormEvent<HTMLFormElement>) => {
+  const handleForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (password !== RePassword) {
       setPasswordError(true);
       return;
     }
 
-    register({
+    await register({
       email: email.trim(),
       username: username.trim(),
       password,

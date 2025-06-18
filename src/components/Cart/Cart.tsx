@@ -1,7 +1,5 @@
 import { useGetCartProducts } from "@/hooks/useGetCartProducts";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
-import { AppState } from "@/store/store";
 
 import cartIcon from "../../../public/images/cart-logo.png";
 
@@ -11,11 +9,10 @@ import "../Cart/Cart.css";
 
 export default function Cart() {
   const { cartProducts } = useGetCartProducts();
-  const token = useSelector((state: AppState) => {
-    return state.authenticate;
-  });
+
   const router = useRouter();
 
+  const token = localStorage.getItem("token");
   const handleCartNavigation = () => {
     if (token) {
       router.push("/cart-page");
