@@ -12,6 +12,8 @@ export default function User() {
   const [showModal, setShowModal] = useState<boolean>(false);
   const router = useRouter();
 
+  const isSignedIn = localStorage.getItem("token");
+
   const handleShowUserModal = () => {
     setShowModal(true);
   };
@@ -26,6 +28,11 @@ export default function User() {
 
   const handleNavigateToRegister = () => {
     router.push("/register-page");
+  };
+
+  const handleLogOutButton = () => {
+    localStorage.removeItem("token");
+    router.push("/sign-in-page");
   };
 
   return (
@@ -47,12 +54,20 @@ export default function User() {
             onMouseOver={handleShowUserModal}
             className="register-signin"
           >
-            <div onClick={handleNavigateToRegister} className="register">
-              Register
-            </div>
-            <div onClick={handleNavigateToSignIn} className="sign-in">
-              Sign in
-            </div>
+            {!isSignedIn ? (
+              <>
+                <div onClick={handleNavigateToRegister} className="register">
+                  Register
+                </div>
+                <div onClick={handleNavigateToSignIn} className="sign-in">
+                  Sign in
+                </div>
+              </>
+            ) : (
+              <div onClick={handleLogOutButton} className="log-out">
+                Log out
+              </div>
+            )}
           </div>
         </>
       )}
