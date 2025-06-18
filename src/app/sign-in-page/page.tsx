@@ -14,8 +14,6 @@ export default function page() {
   const { loading, signIn } = useSignIn();
   const router = useRouter();
 
-  const token = localStorage.getItem("token");
-
   const handleEmailInput = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
@@ -27,6 +25,8 @@ export default function page() {
   const handleForm = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await signIn({ email, password });
+
+    const token = localStorage.getItem("token");
 
     if (token) {
       router.push("/");
